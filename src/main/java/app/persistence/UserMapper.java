@@ -40,16 +40,16 @@ public class UserMapper {
         }
         return userList;
     }
-    public static User login(String username, String password, ConnectionPool connectionPool) throws DatabaseException
+    public static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException
     {
-        String sql = "select * from users where user_name=? and user_password=?";
+        String sql = "select * from users where email=? and user_password=?";
 
         try (
                 Connection connection = connectionPool.getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)
         )
         {
-            ps.setString(1, username);
+            ps.setString(1, email);
             ps.setString(2, password);
 
             ResultSet rs = ps.executeQuery();
@@ -57,7 +57,7 @@ public class UserMapper {
             {
                 int id = rs.getInt("user_id");
                 String role =rs.getString("role_id");
-                String email = rs.getString("email");
+                String username = rs.getString("user_name");
                 return new User(id, username, password, role, email);
             } else
             {

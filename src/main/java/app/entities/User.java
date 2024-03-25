@@ -26,6 +26,10 @@ public class User {
                 '}';
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public int getUserId() {
         return userId;
     }

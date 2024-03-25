@@ -13,12 +13,12 @@ public class UserController {
     }
 
     private static void login(Context ctx, ConnectionPool connectionPool) {
-        String username = ctx.formParam("username");
+        String email = ctx.formParam("email");
         String password = ctx.formParam("password");
 
 
         try {
-            User user = UserMapper.login(username, password, connectionPool );
+            User user = UserMapper.login(email, password, connectionPool );
             ctx.sessionAttribute("currentUser", user);
             ctx.render("login.html");
         } catch (DatabaseException e) {
