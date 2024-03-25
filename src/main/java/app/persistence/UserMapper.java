@@ -39,6 +39,33 @@ public class UserMapper {
         }
         return userList;
     }
+    public static User login(String username, String password, ConnectionPool connectionPool) throws DatabaseException
+    {
+        String sql = "select * from users where user_name=? and password=?";
 
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        )
+        {
+            ps.setString(1, username);
+            ps.setString(2, password);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next())
+            {
+                int id = rs.getInt("user_id");
+                String role =rs.getString("role");
+                return new User(id, username, password, role);
+            } else
+            {
+                throw new DatabaseException("Fejl i login. Prøv igen");
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new DatabaseException("DB fejl", e.getMessage());
+        }
+    }
 
 }
