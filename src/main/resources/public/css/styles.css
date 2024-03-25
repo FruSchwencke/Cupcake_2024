@@ -1,7 +1,113 @@
-/* Stylesheet for the application */
-
-h1 {
-    color: #369;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 3rem;
+div {
+    /* border: 1px red solid;*/
 }
+
+body {
+    display: flex;
+    justify-content: center;
+
+}
+
+#page {
+    min-height: 800px;
+    max-width: 800px;
+    background-color: burlywood; /** Denne farve er sat for at kunne se felter **/
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    background-color: blueviolet;
+
+
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    background-color: lightgray;
+    padding:10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-size: 1.5rem;
+}
+
+#content {
+    /* background-color: lightgray;*/
+    padding:20px;
+}
+
+#intro-text {
+    padding:20px;
+}
+
+#dropdowns {
+    display: flex;
+    gap: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#dropdowns select {
+    flex-grow: 1;
+    font-size: 1.3rem;
+    padding:10px;
+}
+
+#order-button {
+    display: flex;
+    justify-content: flex-end;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 20px;
+
+}
+
+#order-button button:hover {
+    background-color: lightgreen;
+}
+
+#order-button button {
+    width: 80px;
+    height:40px;
+    font-size: 1.3rem;
+    background-color: green;
+    color: white;
+    cursor: pointer;
+}
+
+#comment {
+    padding: 10px;
+}
+
+#comment textarea {
+    padding:10px;
+}
+
+@media screen and (max-width: 600px){
+
+    #dropdowns {
+        flex-direction: column;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: center;
+        gap:10px;
+    }
+
+
+}
+
+
+
+
+
+/*** Generiske styles ***/
+
+button {
+    border-radius: 5px;
+}
+
+
+
