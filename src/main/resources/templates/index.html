@@ -1,13 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html><!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <title>Frontpage</title>
@@ -20,7 +11,7 @@
 <div id="page">
 
     <header>
-        <img src="images/cupcakelogo.png" width="80%"/>
+        <img src="../public/images/cupcakelogo.png" th:src="@{/images/cupcakelogo.png}"width =80%/>
     </header>
 
     <nav>
@@ -28,7 +19,7 @@
             <a href="https://dr.dk">Orders</a>
             <a href="https://eb.dk">Kunder</a>
         </div>
-        <div id="right-nav">jobe@cphbusiness.dk KURV</div>
+        <div id="right-nav">Bruger: KURV</div>
     </nav>
 
     <div id="content">

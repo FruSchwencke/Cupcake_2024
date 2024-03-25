@@ -28,7 +28,8 @@ public class UserMapper {
                     String userName = rs.getString("username");
                     String password = rs.getString("password");
                     String role = rs.getString("role");
-                    User user = new User(id, userName, password, role);
+                    String email =rs.getString("email");
+                    User user = new User(id, userName, password, role, email);
                     userList.add(user);
                 }
             }
@@ -41,7 +42,7 @@ public class UserMapper {
     }
     public static User login(String username, String password, ConnectionPool connectionPool) throws DatabaseException
     {
-        String sql = "select * from users where user_name=? and password=?";
+        String sql = "select * from users where user_name=? and user_password=?";
 
         try (
                 Connection connection = connectionPool.getConnection();
@@ -55,8 +56,9 @@ public class UserMapper {
             if (rs.next())
             {
                 int id = rs.getInt("user_id");
-                String role =rs.getString("role");
-                return new User(id, username, password, role);
+                String role =rs.getString("role_id");
+                String email = rs.getString("email");
+                return new User(id, username, password, role, email);
             } else
             {
                 throw new DatabaseException("Fejl i login. Prøv igen");

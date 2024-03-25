@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS public.users
     email VARCHAR(255),
 	phonenumber VARCHAR(8),
 	user_password VARCHAR(255)
+    FOREIGN KEY (role_id) REFERENCE public.role (role_id)
 );
 
 -- Defining table `orderline` with `orderline_id` as the primary key and foreign keys to `bottom` and `topping`

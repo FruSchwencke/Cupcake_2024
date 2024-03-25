@@ -5,12 +5,14 @@ public class User {
     private String userName;
     private String password;
     private String role;
+    private String email;
 
-    public User(int userId, String userName, String password, String role) {
+    public User(int userId, String userName, String password, String role, String email) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
         this.role = role;
+        this.email = email;
     }
 
     @Override
@@ -20,6 +22,7 @@ public class User {
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 
