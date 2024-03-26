@@ -56,18 +56,20 @@ public class UserMapper {
             if (rs.next())
             {
                 int id = rs.getInt("user_id");
-                int role =rs.getInt("role_id");
+               int role =rs.getInt("role_id");
                 String username = rs.getString("user_name");
                 return new User(id, username, password, role, email);
             } else
             {
-                throw new DatabaseException("Fejl i login. Prøv igen");
+                throw new DatabaseException("error at login. try again");
             }
         }
         catch (SQLException e)
         {
-            throw new DatabaseException("DB fejl", e.getMessage());
+            throw new DatabaseException("DB error", e.getMessage());
         }
+
+
     }
 
 }

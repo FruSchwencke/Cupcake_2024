@@ -11,6 +11,8 @@ public class UserController {
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
         app.post("login", ctx -> login(ctx, connectionPool));
         app.get("login", ctx -> ctx.render("login"));
+
+
     }
 
     private static void login(Context ctx, ConnectionPool connectionPool) {
@@ -20,8 +22,13 @@ public class UserController {
 
         try {
             User user = UserMapper.login(email, password, connectionPool );
-            ctx.sessionAttribute("currentUser", user);
-            ctx.render("login.html");
+            if (user.getRole() ==1){
+                ctx.sessionAttribute("currentUser", user);
+                ctx.render("admin_page.html");
+            }else {
+                ctx.sessionAttribute("currentUser", user);
+                ctx.render("customer_page.html");
+            }
         } catch (DatabaseException e) {
             ctx.attribute(e.getMessage());
             ctx.render("index.html");
