@@ -10,6 +10,7 @@ import io.javalin.http.Context;
 public class UserController {
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
         app.post("login", ctx -> login(ctx, connectionPool));
+        app.get("login", ctx -> ctx.render("login"));
     }
 
     private static void login(Context ctx, ConnectionPool connectionPool) {

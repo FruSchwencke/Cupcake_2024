@@ -23,8 +23,18 @@
             <a href="https://dr.dk">Orders</a>
             <a href="https://eb.dk">Kunder</a>
         </div>
-        <div id="right-nav">Bruger: <span th:text="${session.currentUser.email}"></span> KURV</div>
+        <div id="right-nav"> KURV</div>
     </nav>
+
+    <div>
+        <form id="generic-form" method="post">
+            <input type="text" name="email" placeholder="Email"/>
+            <input type="password" name="password" placeholder="Password"/>
+
+            <button type="submit" formaction="/login">Log på</button>
+        </form>
+    </div>
+
 </div>
 
 
