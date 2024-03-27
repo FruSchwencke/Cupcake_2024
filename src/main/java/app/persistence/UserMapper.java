@@ -25,8 +25,8 @@ public class UserMapper {
                 while (rs.next())
                 {
                     int id = rs.getInt("user_id");
-                    String userName = rs.getString("username");
-                    String password = rs.getString("password");
+                    String userName = rs.getString("user_name");
+                    String password = rs.getString("user_password");
                    int role = rs.getInt("role_id");
                     String email =rs.getString("email");
                     User user = new User(id, userName, password, role, email);
