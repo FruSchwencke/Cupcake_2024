@@ -18,12 +18,26 @@
     <nav>
         <div id="left-nav">
             <a href="https://dr.dk">Orders</a>
-            <a href="https://eb.dk">Kunder</a>
-        </div>
-        <div id="right-nav"> <span th:text="${session.currentUser.email}"></span>  </div>
-    </nav>
 
-    <h1>Du er nu logget ind som Admin</h1>
+        </div>
+        <div id="right-nav">  </div>
+    </nav>
+    <h1>Din kurv </h1>
+
+    <h2>login</h2>
+    <div>
+        <form id="generic-form" method="post">
+            <input type="text" name="email" placeholder="Email"/>
+            <input type="password" name="password" placeholder="Password"/>
+
+            <button type="submit" formaction="/login">Log på</button>
+
+            <div><p th:text="${message}"> </p></div>
+        </form>
+    </div>
+
+    <h3>ikke bruger?</h3>
+    <p><a href="createuser.html" th:href="@{/createuser}">Opret konto</a> </p>
 </div>
 
 </body>
