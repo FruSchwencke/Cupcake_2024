@@ -2,22 +2,22 @@ package app.entities;
 
 public class Top {
 
-    private int top_id;
-    private String name;
+    private int topId;
+    private String flavour;
     private double price;
 
     public Top(int top_id, String name, double price) {
-        this.top_id = top_id;
-        this.name = name;
+        this.topId = top_id;
+        this.flavour = name;
         this.price = price;
     }
 
-    public int getTop_id() {
-        return top_id;
+    public int getTopId() {
+        return topId;
     }
 
-    public String getName() {
-        return name;
+    public String getFlavour() {
+        return flavour;
     }
 
     public double getPrice() {
