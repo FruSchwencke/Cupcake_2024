@@ -7,8 +7,8 @@ public class Bottom {
 
     private double price;
 
-    public Bottom(int bottom_id, String name, double price) {
-        this.bottomId = bottom_id;
+    public Bottom(int bottomId, String name, double price) {
+        this.bottomId = bottomId;
         this.flavour = name;
         this.price = price;
     }
