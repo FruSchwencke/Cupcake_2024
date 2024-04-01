@@ -56,10 +56,11 @@ public class UserMapper {
             ResultSet rs = ps.executeQuery();
             if (rs.next())
             {
-                int id = rs.getInt("user_id");
-               int role =rs.getInt("role_id");
+                int userid = rs.getInt("user_id");
                 String username = rs.getString("user_name");
-                return new User(id, username, password, role, email);
+                int role =rs.getInt("role_id");
+                String phonenumber = rs.getString("phonenumber");
+                return new User(userid, username, password, role, email, phonenumber);
             } else
             {
                 throw new DatabaseException("fejl ved login. prøv igen");
