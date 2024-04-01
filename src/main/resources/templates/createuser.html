@@ -31,12 +31,12 @@
         <div>
             <form class="createuser-form" method="post">
 
-                <input type="text" name="user_name" placeholder="Angiv navn"/>
-                <input type="text" name="phonenumber" placeholder="Angiv telefonnummer"/>
-                <input type="text" name="email" placeholder="Angiv email"/>
-                <input type="password" name="password1" placeholder="Angiv ønsket password"/>
-                <input type="password" name="password2" placeholder="Angiv ønsket password igen"/>
-
+                <input type="text" name="user_name" placeholder="Angiv navn"/> <br>
+                <input type="text" name="phonenumber" placeholder="Angiv telefonnummer"/> <br>
+                <input type="text" name="email" placeholder="Angiv email"/> <br>
+                <input type="password" name="password1" placeholder="Angiv ønsket password"/> <br>
+                <input type="password" name="password2" placeholder="Angiv ønsket password igen"/> <br>
+                <br>
                 <button type="submit" formaction="/createuser">opret bruger</button>
 
                 <div><p th:text="${message}"> </p></div>
