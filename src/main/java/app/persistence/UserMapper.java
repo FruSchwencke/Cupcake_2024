@@ -29,7 +29,8 @@ public class UserMapper {
                     String password = rs.getString("user_password");
                    int role = rs.getInt("role_id");
                     String email =rs.getString("email");
-                    User user = new User(id, userName, password, role, email);
+                    String phonenumber =rs.getString("phonenumber");
+                    User user = new User(id, userName, password, role, email, phonenumber);
                     userList.add(user);
                 }
             }
