@@ -27,15 +27,22 @@
     </nav>
 
     <h1>opret bruger</h1>
-    <form class="createuser-form" method="post">
-        <input type="text" name="email" placeholder="Angiv email"/>
-        <input type="password" name="password1" placeholder="password"/>
-        <input type="password" name="password2" placeholder="Skriv password igen"/>
 
-        <button type="submit" formaction="/createuser">opret bruger</button>
+        <div>
+            <form class="createuser-form" method="post">
 
-        <div><p th:text="${message}"> </p></div>
-    </form>
+                <input type="text" name="user_name" placeholder="Angiv navn"/>
+                <input type="text" name="phonenumber" placeholder="Angiv telefonnummer"/>
+                <input type="text" name="email" placeholder="Angiv email"/>
+                <input type="password" name="password1" placeholder="Angiv ønsket password"/>
+                <input type="password" name="password2" placeholder="Angiv ønsket password igen"/>
+
+                <button type="submit" formaction="/createuser">opret bruger</button>
+
+                <div><p th:text="${message}"> </p></div>
+            </form>
+        </div>
+
 </div>
 
 </body>
