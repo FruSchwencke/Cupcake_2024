@@ -8,13 +8,16 @@ public class User {
     private String email;
     private String phonenumber;
 
-    public User(int userId, String userName, String password, int role, String email, String phonenumber) {
+    private int balance;
+
+    public User(int userId, String userName, String password, int role, String email, String phonenumber, int balance) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
         this.role = role;
         this.email = email;
         this.phonenumber = phonenumber;
+        this.balance = balance;
     }
 
     public User(int id, String username, String password, int role, String email) {

@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class Order {
- private int order_id;
- private int user_id;
+ private int orderId;
+ private int userID;
 
  private List<Cupcake> Orderlist;
  private LocalDateTime pickuptime; // HVORDAN VÆLGES TID?
@@ -13,12 +13,14 @@ public class Order {
 
  private double totalPrice;
 
- public int getOrder_id() {
-  return order_id;
+ public int getOrderId() {
+  return orderId;
  }
 
- public int getUser_id() {
-  return user_id;
+ public int getUserId() {
+
+  return userID;
+
  }
 
  public List<Cupcake> getOrderlist() {

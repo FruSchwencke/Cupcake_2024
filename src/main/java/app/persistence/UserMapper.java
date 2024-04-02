@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static app.Main.connectionPool;
+
 public class UserMapper {
 
     public static List<User> getAllUsers(ConnectionPool connectionPool) throws DatabaseException
@@ -101,6 +103,17 @@ public class UserMapper {
                 msg = "Brugernavnet findes allerede. Vælg et andet";
             }
             throw new DatabaseException(msg, e.getMessage());
+        }
+    }
+
+    public void addBalance (int userId, double balance, ConnectionPool connectionPool)
+    {
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }
