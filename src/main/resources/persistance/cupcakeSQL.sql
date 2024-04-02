@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS public.users
 (
     user_id SERIAL PRIMARY KEY,
     user_name VARCHAR(255),
-    email VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
     phonenumber VARCHAR(8),
     user_password VARCHAR(255),
     role_id INT,
