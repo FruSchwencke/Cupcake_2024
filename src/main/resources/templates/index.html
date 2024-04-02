@@ -30,15 +30,15 @@
             <h2>Øens bedste cupcakes</h2>
         </div>
 
-
+        <form action="#" th:action="@{/addToBasket}">
         <div id="dropdowns">
             <select name="bottom" id="bottom">
                 <option id="0">Vælg bund</option>
-                <option th:id="${bottom.bottomId}" th:each="bottom: ${bottomList}" th:text="${bottom.flavour + ' ' + bottom.price + 'kr.'}"> </option>
+                <option th:value="${bottom.bottomId}" th:each="bottom: ${bottomList}" th:text="${bottom.flavour + ' ' + bottom.price + 'kr.'}"> </option>
             </select>
             <select  name="top" id="top">
                 <option id="0">Vælg top</option>
-                <option th:id="${top.topId}" th:each="top: ${topList}" th:text="${top.flavour + ' ' + top.price + 'kr.'}"> </option>
+                <option th:value="${top.topId}" th:each="top: ${topList}" th:text="${top.flavour + ' ' + top.price + 'kr.'}"> </option>
             </select>
 
             <select name="quantity" id="quantity">
@@ -60,8 +60,19 @@
             <textarea cols="40" rows="4" placeholder="Har du en kommentar, så skriv den her ..."></textarea>
         </div>
 
+        <div>
+            <tr th:each="cupcake: ${basketList}">
+                <td th:text="${cupcake.bottom + ' ' + cupcake.quantity}">
+
+                </td>
+            </tr>
+        </div>
+
         <div id="order-button">
-            <button type="submit">Bestil</button>
+
+                <button type="submit">Bestil</button>
+            </form>
+
         </div>
 
     </div>

@@ -1,9 +1,11 @@
 package app;
 
 import app.config.ThymeleafConfig;
+import app.controllers.BasketController;
 import app.controllers.OrderController;
 import app.controllers.UserController;
 import app.entities.Bottom;
+import app.entities.Cupcake;
 import app.entities.Top;
 import app.entities.User;
 import app.exceptions.DatabaseException;
@@ -34,6 +36,8 @@ public class Main {
         // Routing
 
         app.get("/", ctx -> {
+            List<Cupcake> basketList = new ArrayList<>();
+
             //get top og bund fra mapper
             List<Top> topList = new ArrayList<>();
             try {
@@ -48,13 +52,21 @@ public class Main {
             } catch (DatabaseException e) {
                 System.out.println("Fejl" + e.getMessage());
             }
+            ctx.attribute("basketList", basketList);
+            ctx.sessionAttribute("basketList", basketList);
+
             ctx.attribute("bottomList", bottomList);
+            ctx.sessionAttribute("bottomList", bottomList);
+
             ctx.attribute("topList", topList);
+            ctx.sessionAttribute("topList", topList);
+
             ctx.render("index.html");
         });
 
         UserController.addRoutes(app, connectionPool);
         OrderController.addRoutes(app, connectionPool);
+        BasketController.addRoutes(app,connectionPool);
 
     }
 }
