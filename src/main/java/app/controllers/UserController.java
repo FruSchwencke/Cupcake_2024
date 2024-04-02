@@ -14,7 +14,6 @@ public class UserController {
         app.get("createuser", ctx ->ctx.render("createuser"));
         app.post("createuser", ctx -> createUser(ctx, connectionPool));
 
-
     }
 
     private static void createUser(Context ctx, ConnectionPool connectionPool) {
@@ -62,5 +61,10 @@ public class UserController {
             ctx.render("login.html");
         }
 
+    }
+    private static void logout(Context ctx)
+    {
+        ctx.req().getSession().invalidate();
+        ctx.redirect("/");
     }
 }

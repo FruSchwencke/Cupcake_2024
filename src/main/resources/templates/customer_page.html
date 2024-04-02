@@ -25,6 +25,11 @@
         </a></div>
     </nav>
     <h1>du er nu logget ind som kunde </h1>
+
+
+    <p th:if="${session.currentUser != null}">
+        <a href="index.html" th:href="@{/logout}">Log ud</a>
+    </p>
 </div>
 
 </body>
