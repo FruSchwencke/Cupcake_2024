@@ -21,10 +21,12 @@ public class UserController {
         String email = ctx.formParam("email");
         String password1 = ctx.formParam("password1");
         String password2 = ctx.formParam("password2");
+        String userName = ctx.formParam("user_name");
+        String phoneNumber = ctx.formParam("phonenumber");
 
         if(password1.equals(password2)){
             try {
-                UserMapper.createuser(email,password1,connectionPool);
+                UserMapper.createuser(email, password1, userName, phoneNumber, connectionPool);
                 ctx.attribute("message", "du er hermed oprettet med " + email + ". Nu skal du logge på.");
                 ctx.render("login.html");
 
