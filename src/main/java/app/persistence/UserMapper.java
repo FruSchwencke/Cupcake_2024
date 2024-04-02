@@ -108,10 +108,26 @@ public class UserMapper {
 
     public void addBalance (int userId, double balance, ConnectionPool connectionPool)
     {
+        String sql = "UPDATE users SET balance = balance + ? WHERE user_id = ?";
+
         try (
                 Connection connection = connectionPool.getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)
-        ) {
+        )
+        {
+
+            ps.setDouble(1, balance);
+            ps.setInt(2, userId);
+            int rowsAffected =  ps.executeUpdate();
+            if (rowsAffected > 0) {
+
+            } else {
+
+            }
+
+
+
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

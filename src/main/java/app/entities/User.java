@@ -19,7 +19,15 @@ public class User {
         this.phonenumber = phonenumber;
         this.balance = balance;
     }
-
+    public User(int userId, String userName, String password, int role, String email, String phonenumber) {
+        this.userId = userId;
+        this.userName = userName;
+        this.password = password;
+        this.role = role;
+        this.email = email;
+        this.phonenumber = phonenumber;
+        this.balance = 0;
+    }
     public User(int id, String username, String password, int role, String email) {
     }
 
