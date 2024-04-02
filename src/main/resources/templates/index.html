@@ -18,9 +18,13 @@
         <div id="left-nav">
 
         </div>
-        <div id="right-nav"><a href="login.html" th:href="@{/login}"> Login</a>  <a href ="basket.html" th:href="@{/basket}">
-            <img src="../public/images/basketlogo.png" th:src="@{/images/basketlogo.png}"/>
-        </a></div>
+        <div id="right-nav">
+            <a href="login.html" th:href="@{/login}"> Login</a>
+            <a href ="basket.html" th:href="@{/basket}">
+                <img src="../public/images/basketlogo.png" th:src="@{/images/basketlogo.png}"/>
+                <p th:text="${#lists.size(basketList)}"></p>
+            </a>
+        </div>
     </nav>
 
     <div id="content">
@@ -58,14 +62,6 @@
 
         <div id="comment">
             <textarea cols="40" rows="4" placeholder="Har du en kommentar, så skriv den her ..."></textarea>
-        </div>
-
-        <div>
-            <tr th:each="cupcake: ${basketList}">
-                <td th:text="${cupcake.bottom + ' ' + cupcake.quantity}">
-
-                </td>
-            </tr>
         </div>
 
         <div id="order-button">

@@ -16,7 +16,9 @@ public class Bottom {
     public int getBottomId() {
         return bottomId;
     }
-
+    public String getBottomIdAsString() {
+        return String.valueOf(bottomId);
+    }
     public String getFlavour() {
         return flavour;
     }

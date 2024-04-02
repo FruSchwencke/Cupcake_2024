@@ -34,10 +34,10 @@ public class BasketController {
 
             // filters bottomList to find the bottom whose flavour are equal to bottomParam.
             Bottom selectedBottom = bottomList.stream()
-                    .filter(b -> b.getFlavour().equals(bottomParam)).findFirst().orElse(null);
+                    .filter(b -> b.getBottomIdAsString().equals(bottomParam)).findFirst().orElse(null);
 
             Top selectedTop = topList.stream()
-                    .filter(b -> b.getFlavour().equals(topParam)).findFirst().orElse(null);;
+                    .filter(b -> b.getTopIdAsString().equals(topParam)).findFirst().orElse(null);;
 
             // catches user-error when choosing
             if (selectedBottom == null || selectedTop == null) {
@@ -48,12 +48,17 @@ public class BasketController {
             // calculating the total price, for the customized cupcake and quantity
             double totalPrice = (selectedBottom.getPrice() + selectedTop.getPrice()) * quantity;
 
-
+            // creating a cupcake based on user-choices
             Cupcake newCupcake = new Cupcake(selectedBottom, selectedTop, quantity, totalPrice);
             basketList.add(newCupcake);
 
-
+            basketList.forEach(cupcake -> {
+                System.out.println(cupcake.getPrice());
+            });
             ctx.sessionAttribute("basketList", basketList);
+            ctx.attribute("basketList", basketList);
+            ctx.attribute("topList", topList);
+            ctx.attribute("bottomList", bottomList);
             ctx.render("index.html");
         });
     }

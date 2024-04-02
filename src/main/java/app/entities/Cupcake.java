@@ -14,6 +14,17 @@ public class Cupcake {
         this.price = price;
     }
 
+    public Bottom getBottom() {
+        return bottom;
+    }
+
+    public Top getTop() {
+        return top;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
 
     public double getPrice() {
         return (this.bottom.getPrice() + this.top.getPrice()) * quantity;
