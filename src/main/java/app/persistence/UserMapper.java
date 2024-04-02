@@ -126,8 +126,6 @@ public class UserMapper {
             }
 
 
-
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
