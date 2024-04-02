@@ -33,26 +33,26 @@
 
         <div id="dropdowns">
             <select name="bottom" id="bottom">
-                <option>Vælg bund</option>
-                <option th:each="bottom: ${bottomList}" th:text="${bottom.flavour + ' ' + bottom.price + 'kr.'}"> </option>
+                <option id="0">Vælg bund</option>
+                <option th:id="${bottom.bottomId}" th:each="bottom: ${bottomList}" th:text="${bottom.flavour + ' ' + bottom.price + 'kr.'}"> </option>
             </select>
             <select  name="top" id="top">
-                <option>Vælg top</option>
-                <option th:each="top: ${topList}" th:text="${top.flavour + ' ' + top.price + 'kr.'}"> </option>
+                <option id="0">Vælg top</option>
+                <option th:id="${top.topId}" th:each="top: ${topList}" th:text="${top.flavour + ' ' + top.price + 'kr.'}"> </option>
             </select>
 
             <select name="quantity" id="quantity">
-                <option>Vælg antal</option>
+                <option id="0" >Vælg antal</option>
                 <option value="1">1 stk</option>
-                <option value="1">2 stk</option>
-                <option value="1">3 stk</option>
-                <option value="1">4 stk</option>
-                <option value="1">5 stk</option>
-                <option value="1">6 stk</option>
-                <option value="1">7 stk</option>
-                <option value="1">8 stk</option>
-                <option value="1">9 stk</option>
-                <option value="1">10 stk</option>
+                <option value="2">2 stk</option>
+                <option value="3">3 stk</option>
+                <option value="4">4 stk</option>
+                <option value="5">5 stk</option>
+                <option value="6">6 stk</option>
+                <option value="7">7 stk</option>
+                <option value="8">8 stk</option>
+                <option value="9">9 stk</option>
+                <option value="10">10 stk</option>
             </select>
         </div>
 
