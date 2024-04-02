@@ -3,6 +3,7 @@ package app;
 import app.config.ThymeleafConfig;
 import app.controllers.OrderController;
 import app.controllers.UserController;
+import app.entities.Bottom;
 import app.entities.Top;
 import app.entities.User;
 import app.exceptions.DatabaseException;
@@ -41,6 +42,13 @@ public class Main {
                 System.out.println("Fejl" + e.getMessage());
             }
 
+            List<Bottom> bottomList = new ArrayList<>();
+            try {
+                bottomList = CupcakeMapper.getAllBottom(connectionPool);
+            } catch (DatabaseException e) {
+                System.out.println("Fejl" + e.getMessage());
+            }
+            ctx.attribute("bottomList", bottomList);
             ctx.attribute("topList", topList);
             ctx.render("index.html");
         });
