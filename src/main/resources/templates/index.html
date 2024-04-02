@@ -37,10 +37,9 @@
                 <option value="chocolate">Chokolade (5 kr)</option>
                 <option value="vanilla">Vanille (8 kr)</option>
             </select>
-            <select name="top" id="top">
-                <option>Vælg top</option>
-                <option value="chocolate">Chokolade (5 kr)</option>
-                <option value="vanilla">Vanille (8 kr)</option>
+            <select  name="top" id="top">
+                <option th:each="top: ${topList}" th:text="${top.flavour + ' ' + top.price + 'kr.'}"> </option>
+
             </select>
             <select name="quantity" id="quantity">
                 <option>Vælg antal</option>
