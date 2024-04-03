@@ -12,8 +12,8 @@ import java.util.List;
 
 public class OrderMapper {
 
-    public List<Order> getAllOrdersSimple(ConnectionPool connectionPool) throws SQLException {
-        List<Order> allOrdersSimpel = new ArrayList<>();
+    public static List<Order> getAllOrders(ConnectionPool connectionPool) throws SQLException {
+        List<Order> allOrdersList = new ArrayList<>();
         String sql = "SELECT order_id, order_date, price_total FROM orders";
 
         try (
@@ -27,10 +27,10 @@ public class OrderMapper {
                 double totalPrice = rs.getDouble("price_total");
 
                 Order order = new Order(orderId, pickuptime, totalPrice);
-                allOrdersSimpel.add(order);
+                allOrdersList.add(order);
 
             }
-            return allOrdersSimpel;
+            return allOrdersList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
