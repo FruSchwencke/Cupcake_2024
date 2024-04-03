@@ -51,11 +51,11 @@
             <th>Antal</th>
             <th>Pris</th>
         </tr>
-        <tr th:each="basket: ${basketList}">
-            <td th:text="${top.flavour}" ></td>
-            <td th:text="${bottom.flavour}"></td>
-            <td th:text="${ }" ></td>
-            <td th:text="${ }" ></td>
+        <tr th:each="cupcake: ${basketList}">
+            <td th:text="${cupcake.top.flavour}" ></td>
+            <td th:text="${cupcake.bottom.flavour}"></td>
+            <td th:text="${cupcake.quantity}" ></td>
+            <td th:text="${cupcake.price}" ></td>
         </tr>
     </table>
 
