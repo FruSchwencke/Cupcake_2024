@@ -17,27 +17,90 @@
 
     <nav>
         <div id="left-nav">
-            <a href="https://dr.dk">Orders</a>
+            <a href="index.html">Tilbage</a>
 
         </div>
-        <div id="right-nav">  </div>
+
+        <div id="right-nav">
+                <div id="login-felter">
+                    <a>
+                        <form id="generic-form" method="post">
+                            <input type="text" name="email" placeholder="Email"/>
+                            <input type="password" name="password" placeholder="Password"/>
+
+                            <button type="submit" formaction="/login">Log på</button>
+
+                            <div><p th:text="${message}"> </p></div>
+                        </form>
+                    </a>
+                </div>
+
+                <div id="opret-bruger">
+                    <p><a href="createuser.html" th:href="@{/createuser}">Opret bruger</a> </p>
+                </div>
+
+        </div>
     </nav>
+
+
+
     <h1>Din kurv </h1>
 
-    <h2>login</h2>
-    <div>
-        <form id="generic-form" method="post">
-            <input type="text" name="email" placeholder="Email"/>
-            <input type="password" name="password" placeholder="Password"/>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #c3efd5;
+        }
 
-            <button type="submit" formaction="/login">Log på</button>
+        td, th {
+            border: 1px solid #000000;
+            text-align: left;
+            padding: 8px;
+        }
 
-            <div><p th:text="${message}"> </p></div>
-        </form>
-    </div>
+        tr:nth-child(even) {
+            background-color: white;
+        }
 
-    <h3>ikke bruger?</h3>
-    <p><a href="createuser.html" th:href="@{/createuser}">Opret konto</a> </p>
+    </style>
+
+
+    </head>
+        <body>
+
+                <table>
+                    <tr >
+                        <th>Top</th>
+                        <th>Bund</th>
+                        <th>Antal</th>
+                        <th>Pris</th>
+                    </tr>
+                    <tr th:each="cupcake: ${basketList}">
+                        <td th:text="${cupcake.top.flavour}" ></td>
+                        <td th:text="${cupcake.bottom.flavour}"></td>
+                        <td th:text="${cupcake.quantity}" ></td>
+                        <td th:text="${cupcake.price}" ></td>
+                    </tr>
+                    <tr>
+                        <tfoot>
+                        <th colspan="3">Totalpris er: </th>
+                        <td th:text="${sum}" >Total price</td>
+                        </tfoot>
+                    </tr>
+
+                </table>
+
+        </body>
+
+
+            <div>
+                <form id="order-button" method="post">
+                    <button type="submit">Betal</button>
+                </form>
+            </div>
+
 </div>
 
 </body>

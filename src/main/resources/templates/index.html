@@ -16,10 +16,10 @@
 
     <nav>
         <div id="left-nav">
-
-        </div>
-        <div id="right-nav">
             <a href="login.html" th:href="@{/login}"> Login</a>
+        </div>
+
+        <div id="right-nav">
             <a href ="basket.html" th:href="@{/basket}">
                 <img src="../public/images/basketlogo.png" th:src="@{/images/basketlogo.png}"/>
                 <p th:text="${#lists.size(basketList)}"></p>
