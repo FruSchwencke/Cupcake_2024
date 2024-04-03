@@ -17,10 +17,29 @@
 
     <nav>
         <div id="left-nav">
-            <a href="https://dr.dk">Orders</a>
+            <a href="index.html">Tilbage</a>
 
         </div>
-        <div id="right-nav">  </div>
+
+        <div id="right-nav">
+                <div id="login-felter">
+                    <a>
+                        <form id="generic-form" method="post">
+                            <input type="text" name="email" placeholder="Email"/>
+                            <input type="password" name="password" placeholder="Password"/>
+
+                            <button type="submit" formaction="/login">Log på</button>
+
+                            <div><p th:text="${message}"> </p></div>
+                        </form>
+                    </a>
+                </div>
+
+                <div id="opret-konto">
+                    <p><a href="createuser.html" th:href="@{/createuser}">Opret konto</a> </p>
+                </div>
+
+        </div>
     </nav>
     <h1>Din kurv </h1>
 
@@ -70,21 +89,12 @@
     </body>
 
 
-
-    <h2>login</h2>
     <div>
-        <form id="generic-form" method="post">
-            <input type="text" name="email" placeholder="Email"/>
-            <input type="password" name="password" placeholder="Password"/>
-
-            <button type="submit" formaction="/login">Log på</button>
-
-            <div><p th:text="${message}"> </p></div>
+        <form id="betal-knap" method="post">
+            <button type="submit">Betal</button>
         </form>
     </div>
 
-    <h3>ikke bruger?</h3>
-    <p><a href="createuser.html" th:href="@{/createuser}">Opret konto</a> </p>
 </div>
 
 </body>
