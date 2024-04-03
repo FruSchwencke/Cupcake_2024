@@ -24,6 +24,45 @@
     </nav>
     <h1>Din kurv </h1>
 
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+    </head>
+    <body>
+
+    <table>
+        <tr >
+            <th>Top</th>
+            <th>Bund</th>
+            <th>Antal</th>
+            <th>Pris</th>
+        </tr>
+        <tr th:each="basket: ${basketList}">
+            <td th:text="${top.flavour}" ></td>
+            <td th:text="${bottom.flavour}"></td>
+            <td th:text="${ }" ></td>
+            <td th:text="${ }" ></td>
+        </tr>
+    </table>
+
+    </body>
+
+
+
     <h2>login</h2>
     <div>
         <form id="generic-form" method="post">

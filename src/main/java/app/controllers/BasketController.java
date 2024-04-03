@@ -52,9 +52,11 @@ public class BasketController {
             Cupcake newCupcake = new Cupcake(selectedBottom, selectedTop, quantity, totalPrice);
             basketList.add(newCupcake);
 
+            // til at se i terminalen at der sker noget...
             basketList.forEach(cupcake -> {
                 System.out.println(cupcake.getPrice());
             });
+
             ctx.sessionAttribute("basketList", basketList);
             ctx.attribute("basketList", basketList);
             ctx.attribute("topList", topList);
