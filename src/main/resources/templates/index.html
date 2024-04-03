@@ -19,12 +19,15 @@
             <a href="login.html" th:href="@{/login}"> Login</a>
         </div>
 
-        <div id="right-nav">
-            <a href ="basket.html" th:href="@{/basket}">
-                <img src="../public/images/basketlogo.png" th:src="@{/images/basketlogo.png}"/>
-                <p th:text="${#lists.size(basketList)}"></p>
+        <div id="right-nav" class="basket-container">
+            <a href="basket.html" th:href="@{/basket}" class="basket-link">
+                <img src="../public/images/basketlogo.png" th:src="@{/images/basketlogo.png}" alt="Basket Logo" class="basket-image">
+                <p class="basket-count">
+                    <span th:text="${#lists.size(basketList)}"></span>
+                </p>
             </a>
         </div>
+
     </nav>
 
     <div id="content">

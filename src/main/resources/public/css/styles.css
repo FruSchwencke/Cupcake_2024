@@ -83,6 +83,34 @@ nav {
 #comment textarea {
     padding:10px;
 }
+.basket-container {
+    position: relative;
+}
+
+.basket-link {
+    display: inline-block;
+}
+
+.basket-image {
+    width: 50px;
+    height: 50px;
+}
+
+.basket-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 5px;
+    background-color: lightgrey;
+    border-radius: 50%;
+    font-size: 14px;
+    border: 2px solid black;
+}
+
+.basket-count span {
+    color: black;
+}
 
 @media screen and (max-width: 600px){
 
