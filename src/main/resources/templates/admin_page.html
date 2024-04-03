@@ -25,6 +25,11 @@
 
     <h1>Du er nu logget ind som Admin</h1>
 
+    
+
+    <tr th:each="order: ${order}">
+        <td th:text="${orders.order_date}"></td>
+    </tr>
 
 
     <p th:if="${session.currentUser != null}">
