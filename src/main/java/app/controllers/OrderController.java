@@ -16,8 +16,17 @@ public class OrderController {
             //initializing a current basket-list
             List<Cupcake> basketList = ctx.sessionAttribute("basketList");
 
+            // getting the sum of all orderlines by using totalPrice
+            double sum = basketList.stream().mapToDouble(Cupcake::getPrice).sum();
+
+
+            System.out.println(sum);
+
+
             ctx.sessionAttribute("basketList", basketList);
             ctx.attribute("basketList", basketList);
+            ctx.sessionAttribute("sum", sum );
+            ctx.attribute("sum", sum );
             ctx.render("basket.html");
 
         });

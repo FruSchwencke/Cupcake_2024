@@ -38,8 +38,9 @@
         }
 
         tr:nth-child(even) {
-            background-color: #dddddd;
+            background-color: #c3efd5;
         }
+
     </style>
     </head>
     <body>
@@ -57,6 +58,13 @@
             <td th:text="${cupcake.quantity}" ></td>
             <td th:text="${cupcake.price}" ></td>
         </tr>
+        <tr>
+            <tfoot>
+            <td>Totalpris er: </td>
+            <td th:text="${sum}" >Total price</td>
+            </tfoot>
+        </tr>
+
     </table>
 
     </body>
