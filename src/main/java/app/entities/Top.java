@@ -16,6 +16,10 @@ public class Top {
         return topId;
     }
 
+    public String getTopIdAsString() {
+        return String.valueOf(topId);
+    }
+
     public String getFlavour() {
         return flavour;
     }

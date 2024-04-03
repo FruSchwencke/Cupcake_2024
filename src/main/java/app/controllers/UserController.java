@@ -23,6 +23,12 @@ public class UserController {
         String userName = ctx.formParam("user_name");
         String phoneNumber = ctx.formParam("phonenumber");
 
+        if (!EmailValidate(email)){
+            ctx.attribute("message", "Email address must contain '@' symbol");
+            ctx.render("login.html");
+            return;
+        }
+
         if(password1.equals(password2)){
             try {
                 UserMapper.createuser(email, password1, userName, phoneNumber, connectionPool);
@@ -40,6 +46,10 @@ public class UserController {
             ctx.render("createuser.html");
         }
 
+    }
+
+    private static boolean EmailValidate(String email) {
+        return email.contains("@");
     }
 
     private static void login(Context ctx, ConnectionPool connectionPool) {
