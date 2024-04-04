@@ -22,7 +22,7 @@ public class OrderMapper {
         ) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                int orderId = rs.getInt("order_Id");
+                int orderId = rs.getInt("order_id");
                 LocalDate pickuptime = rs.getDate("order_date").toLocalDate();
                 double totalPrice = rs.getDouble("price_total");
 

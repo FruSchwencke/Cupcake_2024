@@ -19,6 +19,7 @@ public class UserController {
         app.get("createuser", ctx ->ctx.render("createuser"));
         app.post("createuser", ctx -> createUser(ctx, connectionPool));
 
+
     }
 
     private static void createUser(Context ctx, ConnectionPool connectionPool) {
@@ -66,6 +67,8 @@ public class UserController {
             User user = UserMapper.login(email, password, connectionPool );
             if (user.getRole() ==1){
                 ctx.sessionAttribute("currentUser", user);
+                List<Order> allOrdersList = getAllOrders(connectionPool);
+                ctx.attribute("allOrdersList",allOrdersList);
                 ctx.render("admin_page.html");
             }else {
                 ctx.sessionAttribute("currentUser", user);
@@ -78,12 +81,14 @@ public class UserController {
 
     }
 
-    private static void getAllOrders(Context ctx, ConnectionPool connectionPool)
+    private static List<Order> getAllOrders(ConnectionPool connectionPool)
     {
+
+
         try {
             List<Order> allOrdersList = OrderMapper.getAllOrders(connectionPool);
-            ctx.attribute("allOrdersList",allOrdersList);
-            ctx.render("admin_page.html");
+            return allOrdersList;
+            // ctx.render("admin_page.html");
 
         } catch (SQLException e) {
             throw new RuntimeException(e); //HUSK!
