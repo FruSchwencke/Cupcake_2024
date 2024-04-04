@@ -118,15 +118,9 @@ public class UserMapper {
             ps.setDouble(1, balance);
             ps.setInt(2, userId);
             int rowsAffected =  ps.executeUpdate();
-            if (rowsAffected > 0) {
-
-            } else {
-
-            }
-
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e); //SKAL ÆNDRES!
         }
     }
 }

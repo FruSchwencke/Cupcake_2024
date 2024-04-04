@@ -1,8 +1,12 @@
 package app.persistence;
 
-import app.entities.Cupcake;
+
 import app.entities.Order;
 import app.exceptions.DatabaseException;
+import app.entities.Top;
+import app.entities.Bottom;
+import app.entities.Cupcake;
+
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -36,9 +40,41 @@ public class OrderMapper {
         }
     }
 
+    public List<Cupcake> getOrderlineList(int order_id, ConnectionPool connectionpool) {
 
+        List<Cupcake> orderlineList = new ArrayList<>();
+        String sql = "SELECT bottom_id, top_id, quantity FROM orderline WHERE order_id=?";
+        try (
+                Connection connection = connectionpool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+            ResultSet rs = ps.executeQuery();
+            ps.setInt(1, order_id);
+
+            while (rs.next()) {
+                Top top = new Top(rs.getInt("topping_id"), rs.getString("topping.flavour"), rs.getDouble("topping.price"));
+                Bottom bottom = new Bottom(rs.getInt("bottom_id"), rs.getString("bottom.flavour"), rs.getDouble("bottom.price"));
+                int quantity = rs.getInt("quantity");
+
+                Cupcake cupcake = new Cupcake(bottom, top, quantity);
+
+                orderlineList.add(cupcake);
+
+            }
+
+            return orderlineList;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
+
+
+
+
+
 
 
 //        public List<Order> getOrderByDate (LocalDate pickuptime, ConnectionPool connectionPool) throws SQLException {
