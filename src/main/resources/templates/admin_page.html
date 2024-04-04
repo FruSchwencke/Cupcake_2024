@@ -25,6 +25,25 @@
 
     <h1>Du er nu logget ind som Admin</h1>
 
+    <h1>Alle ordrer</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Ordre ID</th>
+            <th>Ordredato</th>
+            <th>Total pris</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="order : ${allOrdersList}">
+            <td th:text="${order.orderId}"></td>
+            <td th:text="${order.pickuptime}"></td>
+            <td th:text="${order.totalPrice}"></td>
+        </tr>
+        </tbody>
+    </table>
+
 
 
     <p th:if="${session.currentUser != null}">

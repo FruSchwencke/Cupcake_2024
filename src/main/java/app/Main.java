@@ -4,16 +4,15 @@ import app.config.ThymeleafConfig;
 import app.controllers.BasketController;
 import app.controllers.OrderController;
 import app.controllers.UserController;
-import app.entities.Bottom;
-import app.entities.Cupcake;
-import app.entities.Top;
-import app.entities.User;
+import app.entities.*;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
 import app.persistence.CupcakeMapper;
+import app.persistence.OrderMapper;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +22,9 @@ public class Main {
     private static final String URL = "jdbc:postgresql://localhost:5432/%s?currentSchema=public";
     private static final String DB = "cupcake";
 
-    private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
-    public static void main(String[] args)
-    {
+    public static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
+    public static void main(String[] args)  {
+
         // Initializing Javalin and Jetty webserver
 
         Javalin app = Javalin.create(config -> {
