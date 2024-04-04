@@ -40,6 +40,7 @@ public class OrderMapper {
         }
     }
 
+    //IKKE FÆRDIG:
     public List<Cupcake> getOrderlineList(int order_id, ConnectionPool connectionpool) {
 
         List<Cupcake> orderlineList = new ArrayList<>();

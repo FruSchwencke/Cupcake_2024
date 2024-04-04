@@ -16,8 +16,11 @@ public class UserController {
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
         app.post("login", ctx -> login(ctx, connectionPool));
         app.get("login", ctx -> ctx.render("login"));
+        app.get("logout", ctx -> logout(ctx));
         app.get("createuser", ctx ->ctx.render("createuser"));
         app.post("createuser", ctx -> createUser(ctx, connectionPool));
+
+
 
 
     }
@@ -95,6 +98,20 @@ public class UserController {
         }
 
     }
+
+    public static void addBalance (Context ctx, ConnectionPool connectionPool) //mangler ifstatement
+    {
+        double balance = Double.parseDouble(ctx.formParam("balance"));
+
+        int userId = Integer.parseInt(ctx.formParam("userId"));
+
+
+        UserMapper.addBalance(userId, balance, connectionPool);
+
+        ctx.redirect("/addbalance.html");
+    }
+
+
 
 
 

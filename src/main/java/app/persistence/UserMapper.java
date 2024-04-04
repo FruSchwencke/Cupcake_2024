@@ -105,7 +105,7 @@ public class UserMapper {
         }
     }
 
-    public void addBalance (int userId, double balance, ConnectionPool connectionPool)
+    public static void addBalance (int userId, double balance, ConnectionPool connectionPool)
     {
         String sql = "UPDATE users SET balance = balance + ? WHERE user_id = ?";
 
@@ -120,7 +120,7 @@ public class UserMapper {
             int rowsAffected =  ps.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e); //SKAL ÆNDRES!
+            throw new RuntimeException(e);
         }
     }
 }

@@ -26,7 +26,7 @@
     <h1>Du er nu logget ind som Admin</h1>
 
     <h1>Alle ordrer</h1>
-    <table>
+    <table class="All-orders-tabel">
         <thead>
         <tr>
             <th>Ordre ID</th>
@@ -43,6 +43,18 @@
         </tr>
         </tbody>
     </table>
+
+
+    <h1>Tilføj penge til konto</h1>
+    <form action="/add-balance" method="post">
+        <label for="userId">Brugerens ID:</label><br>
+        <input type="number" id="userId" name="userId" required><br>
+
+        <label for="balance">Beløb til tilføjelse:</label><br>
+        <input type="number" id="balance" name="balance" required><br><br>
+
+        <button type="submit">Tilføj Balance</button>
+    </form>
 
 
 
