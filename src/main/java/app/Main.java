@@ -3,6 +3,7 @@ package app;
 import app.config.ThymeleafConfig;
 import app.controllers.BasketController;
 import app.controllers.OrderController;
+import app.controllers.PaymentController;
 import app.controllers.UserController;
 import app.entities.*;
 import app.exceptions.DatabaseException;
@@ -66,6 +67,7 @@ public class Main {
         UserController.addRoutes(app, connectionPool);
         OrderController.addRoutes(app, connectionPool);
         BasketController.addRoutes(app,connectionPool);
+        PaymentController.addRoutes(app, connectionPool);
 
     }
 }
