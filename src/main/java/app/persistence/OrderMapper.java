@@ -1,18 +1,19 @@
 package app.persistence;
 
 
-import app.entities.Order;
+import app.entities.*;
 import app.exceptions.DatabaseException;
-import app.entities.Top;
-import app.entities.Bottom;
-import app.entities.Cupcake;
 
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import static app.Main.connectionPool;
+import static java.time.ZoneOffset.UTC;
 
 public class OrderMapper {
 
@@ -70,7 +71,7 @@ public class OrderMapper {
         }
     }
 
-}
+
 
 
 
@@ -140,3 +141,37 @@ public class OrderMapper {
 //        }
 //
 
+
+
+    public static void createOrder(User user, List<Cupcake> cupcakes, LocalDate pickUpTime, double totalPrice, ConnectionPool connectionPool) throws DatabaseException
+    {
+        String sql = "insert into orders (user_id, price_total, pickup_time) values (?,?,?)";
+
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        )
+        {
+            ps.setInt(1, user.getUserId());
+            ps.setDouble(2, totalPrice);
+            //TODO: fix timestamp
+            ps.setTimestamp(3, new Timestamp(new Date().getTime()));
+
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected != 1)
+            {
+                throw new DatabaseException("Fejl ved oprettelse af ny bruger");
+            }
+        }
+        catch (SQLException e)
+        {
+            String msg = "Der er sket en fejl. Prøv igen";
+            if (e.getMessage().startsWith("ERROR: duplicate key value "))
+            {
+                msg = "Brugernavnet findes allerede. Vælg et andet";
+            }
+            throw new DatabaseException(msg, e.getMessage());
+        }
+    }
+}

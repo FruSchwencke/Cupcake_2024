@@ -90,4 +90,8 @@ public class User {
                 ", phonenumber='" + phonenumber + '\'' +
                 '}';
     }
+
+    public String getUserIdAsString() {
+        return String.valueOf(userId);
+    }
 }
