@@ -10,7 +10,6 @@ import app.entities.Cupcake;
 
 import java.sql.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +17,7 @@ public class OrderMapper {
 
     public static List<Order> getAllOrders(ConnectionPool connectionPool) throws SQLException {
         List<Order> allOrdersList = new ArrayList<>();
-        String sql = "SELECT order_id, order_date, price_total FROM orders";
+        String sql = "SELECT order_id, price_total FROM orders";
 
         try (
                 Connection connection = connectionPool.getConnection();
@@ -27,10 +26,9 @@ public class OrderMapper {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int orderId = rs.getInt("order_id");
-                LocalDate pickuptime = rs.getDate("order_date").toLocalDate();
                 double totalPrice = rs.getDouble("price_total");
 
-                Order order = new Order(orderId, pickuptime, totalPrice);
+                Order order = new Order(orderId, totalPrice);
                 allOrdersList.add(order);
 
             }
@@ -40,71 +38,43 @@ public class OrderMapper {
         }
     }
 
-    //IKKE FÆRDIG:
-    public List<Cupcake> getOrderlineList(int order_id, ConnectionPool connectionpool) {
+
+    public static List<Cupcake> getOrderlinePerOrder(int orderId, ConnectionPool connectionPool) {
 
         List<Cupcake> orderlineList = new ArrayList<>();
-        String sql = "SELECT bottom_id, top_id, quantity FROM orderline WHERE order_id=?";
+        String sql = "SELECT ol.topping_id, ol.bottom_id, ol.quantity, t.flavour AS top_flavour, b.flavour AS bottom_flavour " +
+                "FROM orderline AS ol " +
+                "JOIN topping AS t ON ol.topping_id = t.topping_id " +
+                "JOIN bottom AS b ON ol.bottom_id = b.bottom_id " +
+                "WHERE ol.order_id = ?";
+
         try (
-                Connection connection = connectionpool.getConnection();
+                Connection connection = connectionPool.getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)
         ) {
+            ps.setInt(1, orderId);
             ResultSet rs = ps.executeQuery();
-            ps.setInt(1, order_id);
 
             while (rs.next()) {
-                Top top = new Top(rs.getInt("topping_id"), rs.getString("topping.flavour"), rs.getDouble("topping.price"));
-                Bottom bottom = new Bottom(rs.getInt("bottom_id"), rs.getString("bottom.flavour"), rs.getDouble("bottom.price"));
+                Top top = new Top(rs.getInt("topping_id"), rs.getString("top_flavour"));
+                Bottom bottom = new Bottom(rs.getInt("bottom_id"), rs.getString("bottom_flavour"));
                 int quantity = rs.getInt("quantity");
 
                 Cupcake cupcake = new Cupcake(bottom, top, quantity);
-
                 orderlineList.add(cupcake);
-
             }
 
             return orderlineList;
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
         }
-    }
 
+
+    }
 }
 
 
-
-
-
-
-
-//        public List<Order> getOrderByDate (LocalDate pickuptime, ConnectionPool connectionPool) throws SQLException {
-//
-//        List<Order> ordersDate = new ArrayList<>();
-//        String sql = "SELECT orderId, userID, totalPrice FROM orders WHERE pickuptime = ?";
-//        try (
-//                Connection connection = connectionPool.getConnection();
-//                PreparedStatement ps = connection.prepareStatement(sql)
-//        ) {
-//            ps.setDate(1, java.sql.Date.valueOf(pickuptime));
-//            ResultSet rs = ps.executeQuery();
-//            {
-//                while (rs.next()) {
-//                    int orderId = rs.getInt("orderId");
-//                    int userID = rs.getInt("userID");
-//                    double totalPrice = rs.getDouble("totalPrice");
-//
-//                    List<Cupcake> orderListDate =
-//
-//
-//                }
-//            }
-//        }
-//    }
-//
-//        return orderListDate;
-//    }
-//
 //
 //    public static List<Order> getOrderByUserID(int user_id, ConnectionPool connectionPool) throws DatabaseException {
 //        String sql = "SELECT * from users WHERE users_id=?";
@@ -129,14 +99,8 @@ public class OrderMapper {
 //        }
 //
 //
-/////MANGLER!!
-//
-//    }
-//} catch(SQLException e){
-//        throw new RuntimeException(e);
-//        }
 //        return orderList;
 //        }
-//        }
-//
+
+
 

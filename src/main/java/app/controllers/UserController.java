@@ -1,5 +1,6 @@
 package app.controllers;
 
+import app.entities.Cupcake;
 import app.entities.Order;
 import app.entities.User;
 import app.exceptions.DatabaseException;
@@ -19,9 +20,8 @@ public class UserController {
         app.get("logout", ctx -> logout(ctx));
         app.get("createuser", ctx ->ctx.render("createuser"));
         app.post("createuser", ctx -> createUser(ctx, connectionPool));
-
-
-
+        app.post("addBalance", ctx -> addBalance(ctx, connectionPool));
+        app.get("/order_details.html", ctx -> showOrderLines(ctx, connectionPool));
 
     }
 
@@ -87,11 +87,10 @@ public class UserController {
     private static List<Order> getAllOrders(ConnectionPool connectionPool)
     {
 
-
         try {
             List<Order> allOrdersList = OrderMapper.getAllOrders(connectionPool);
             return allOrdersList;
-            // ctx.render("admin_page.html");
+
 
         } catch (SQLException e) {
             throw new RuntimeException(e); //HUSK!
@@ -99,20 +98,36 @@ public class UserController {
 
     }
 
+
+    public static void showOrderLines(Context ctx, ConnectionPool connectionPool) {
+
+        int orderId = Integer.parseInt(ctx.queryParam("orderId"));
+
+        List<Cupcake> orderLines = OrderMapper.getOrderlinePerOrder(orderId, connectionPool);
+
+        ctx.attribute("orderLines", orderLines);
+
+        ctx.render("order_details.html");
+    }
+
     public static void addBalance (Context ctx, ConnectionPool connectionPool) //mangler ifstatement
     {
         double balance = Double.parseDouble(ctx.formParam("balance"));
 
         int userId = Integer.parseInt(ctx.formParam("userId"));
+        try {
+            UserMapper.addBalance(userId, balance, connectionPool);
+
+            ctx.attribute("message", "Penge overført");
+            ctx.render("admin_page.html");
 
 
-        UserMapper.addBalance(userId, balance, connectionPool);
+        }catch (RuntimeException e) {
+            ctx.attribute("message", "Bruger findes ikke");
+            ctx.render("admin_page.html");
+        }
 
-        ctx.redirect("/addbalance.html");
     }
-
-
-
 
 
     private static void logout(Context ctx)
