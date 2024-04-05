@@ -21,7 +21,8 @@ public class UserController {
         app.get("createuser", ctx ->ctx.render("createuser"));
         app.post("createuser", ctx -> createUser(ctx, connectionPool));
         app.post("addBalance", ctx -> addBalance(ctx, connectionPool));
-        app.get("/order_details.html", ctx -> showOrderLines(ctx, connectionPool));
+        app.get("order_details.html", ctx -> showOrderLines(ctx, connectionPool));
+        app.get("admin", ctx -> ctx.render("admin"));
 
     }
 
@@ -109,6 +110,8 @@ public class UserController {
 
         ctx.render("order_details.html");
     }
+
+
 
     public static void addBalance (Context ctx, ConnectionPool connectionPool) //mangler ifstatement
     {

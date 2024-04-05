@@ -45,6 +45,21 @@
 
 
 
+
+
+    <p th:if="${session.currentUser != null}">
+        <a href="admin_page.html" th:href="@{/admin}">Tilbage</a>
+    </p>
+
+
+
+
+
+
+
+
+
+
     <p th:if="${session.currentUser != null}">
         <a href="index.html" th:href="@{/logout}">Log ud</a>
     </p>
