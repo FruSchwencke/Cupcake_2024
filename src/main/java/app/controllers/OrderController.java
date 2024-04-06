@@ -3,6 +3,7 @@ package app.controllers;
 import app.entities.Bottom;
 import app.entities.Cupcake;
 import app.entities.Top;
+import app.entities.User;
 import app.persistence.ConnectionPool;
 import io.javalin.Javalin;
 import jakarta.servlet.http.HttpSession;
@@ -22,9 +23,6 @@ public class OrderController {
             double sum = basketList.stream().mapToDouble(Cupcake::getPrice).sum();
 
 
-            System.out.println(sum);
-
-
             ctx.sessionAttribute("basketList", basketList);
             ctx.attribute("basketList", basketList);
             ctx.sessionAttribute("sum", sum );
@@ -32,10 +30,6 @@ public class OrderController {
             ctx.render("basket.html");
 
         });
-
     }
-
-
-
 }
 

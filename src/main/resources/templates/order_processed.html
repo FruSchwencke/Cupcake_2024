@@ -17,20 +17,13 @@
 
     <nav>
         <div id="left-nav">
-            <a href="https://dr.dk">Orders</a>
+            <a href="index.html">Tilbage</a>
 
         </div>
-        <div id="right-nav"> <span th:text="${session.currentUser.email}"></span>  <a href ="basket.html" th:href="@{/basket}">
-            <img src="../public/images/basketlogo.png" th:src="@{/images/basketlogo.png}"/>
-        </a></div>
     </nav>
-    <h1>du er nu logget ind som kunde </h1>
 
+    <h1>Tak for din bestilling! </h1>
 
-    <p th:if="${session.currentUser != null}">
-        <a href="index.html" th:href="@{/logout}">Log ud</a>
-    </p>
 </div>
-
 </body>
 </html>

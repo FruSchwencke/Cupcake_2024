@@ -38,6 +38,18 @@ CREATE TABLE IF NOT EXISTS public.users
     FOREIGN KEY (role_id) REFERENCES public.role (role_id)
     );
 
+-- Defining table `orders` with `order_id` as the primary key and a foreign key to `users`
+CREATE TABLE IF NOT EXISTS public.orders
+(
+    order_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    price_total NUMERIC(10,2) NOT NULL,
+    pickup_time TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES public.users (user_id)
+    );
+
+
 -- Defining table `orderline` with `orderline_id` as the primary key and foreign keys to `bottom` and `topping`
 CREATE TABLE IF NOT EXISTS public.orderline
 (
@@ -45,23 +57,12 @@ CREATE TABLE IF NOT EXISTS public.orderline
     bottom_id INT NOT NULL,
     topping_id INT NOT NULL,
     quantity INT,
+	order_id INT NOT NULL,
+	FOREIGN KEY (order_id) REFERENCES public.orders (order_id),
     FOREIGN KEY (bottom_id) REFERENCES public.bottom (bottom_id),
     FOREIGN KEY (topping_id) REFERENCES public.topping (topping_id)
     );
 
--- Defining table `orders` with `order_id` as the primary key and a foreign key to `users`
-CREATE TABLE IF NOT EXISTS public.orders
-(
-    order_id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL,
-    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    orderline_id INT NOT NULL,
-    price_total NUMERIC(10,2) NOT NULL,
-    pickup_time TIMESTAMP,
-    FOREIGN KEY (orderline_id) REFERENCES public.orderline (orderline_id),
-    FOREIGN KEY (user_id) REFERENCES public.users (user_id)
-
-    );
 
 
 COMMIT;
