@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
+
 <title>Cupcake</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,45 +25,38 @@
 
     <h1>Du er nu logget ind som Admin</h1>
 
-    <h1>Alle ordrer</h1>
-    <table class="All-orders-tabel">
+    <table>
         <thead>
         <tr>
-            <th>Ordre ID</th>
-            <th>Total pris</th>
-
+            <th>Topping</th>
+            <th>Bund</th>
+            <th>STK</th>
         </tr>
         </thead>
         <tbody>
 
-        <tr th:each="order : ${allOrdersList}">
-            <td th:text="${order.orderId}"></td>
-            <td th:text="${order.totalPrice}"></td>
-
+        <tr th:each="cupcake : ${orderLines}">
+            <td th:text="${cupcake.top.flavour}"></td>
+            <td th:text="${cupcake.bottom.flavour}"></td>
+            <td th:text="${cupcake.quantity}"></td>
         </tr>
         </tbody>
     </table>
-    <form action="all_orderlines.html">
-        <button type="submit">Se alle orderlines</button>
-    </form>
-
-    <h1>Indtast Order ID</h1>
-    <form id="order-form" method="get" action="/order_details.html">
-        <input type="text" name="orderId" placeholder="Indtast Order ID" required/>
-        <button type="submit">Vis ordre</button>
-    </form>
 
 
-    <h1>Tilføj penge til konto</h1>
-    <form action="/addBalance" method="post">
-        <label for="userId">Brugerens ID:</label><br>
-        <input type="number" id="userId" name="userId" required><br>
 
-        <label for="balance">Beløb til tilføjelse:</label><br>
-        <input type="number" id="balance" name="balance" required><br><br>
 
-        <button type="submit">Tilføj Balance</button>
-    </form>
+
+    <p th:if="${session.currentUser != null}">
+        <a href="admin_page.html" th:href="@{/admin}">Tilbage</a>
+    </p>
+
+
+
+
+
+
+
 
 
 

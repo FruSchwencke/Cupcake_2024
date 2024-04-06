@@ -13,6 +13,11 @@ public class Bottom {
         this.price = price;
     }
 
+    public Bottom(int bottomId, String flavour) {
+        this.bottomId = bottomId;
+        this.flavour = flavour;
+    }
+
     public int getBottomId() {
         return bottomId;
     }
