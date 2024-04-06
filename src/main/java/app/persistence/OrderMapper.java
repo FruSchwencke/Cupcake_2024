@@ -72,13 +72,6 @@ public class OrderMapper {
     }
 
 
-
-
-
-
-
-
-
 //        public List<Order> getOrderByDate (LocalDate pickuptime, ConnectionPool connectionPool) throws SQLException {
 //
 //        List<Order> ordersDate = new ArrayList<>();
@@ -142,16 +135,14 @@ public class OrderMapper {
 //
 
 
-
-    public static void createOrder(User user, List<Cupcake> cupcakes, LocalDate pickUpTime, double totalPrice, ConnectionPool connectionPool) throws DatabaseException
-    {
+    public static void createOrder(User user, List<Cupcake> cupcakes, double totalPrice, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "insert into orders (user_id, price_total, pickup_time) values (?,?,?)";
+
 
         try (
                 Connection connection = connectionPool.getConnection();
-                PreparedStatement ps = connection.prepareStatement(sql)
-        )
-        {
+                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)
+        ) {
             ps.setInt(1, user.getUserId());
             ps.setDouble(2, totalPrice);
             //TODO: fix timestamp
@@ -159,19 +150,66 @@ public class OrderMapper {
 
 
             int rowsAffected = ps.executeUpdate();
-            if (rowsAffected != 1)
+            if (rowsAffected == 1)
             {
-                throw new DatabaseException("Fejl ved oprettelse af ny bruger");
+                ResultSet rs = ps.getGeneratedKeys();
+                rs.next();
+                int orderId = rs.getInt("order_id");
+
+                //For each customized cupcake and wanted quantity, the orderLine is created in DB
+                cupcakes.forEach(cupcake -> {
+                    try {
+                        createOrderLine(cupcake.getBottom().getBottomId(), cupcake.getTop().getTopId(), cupcake.getQuantity(), orderId);
+                    } catch (DatabaseException e) {
+                        throw new RuntimeException(e.getMessage());
+                    }
+                });
+
+
+            } else {
+                throw new DatabaseException("Fejl. Prøv igen");
             }
-        }
-        catch (SQLException e)
-        {
+
+        } catch (SQLException e) {
             String msg = "Der er sket en fejl. Prøv igen";
-            if (e.getMessage().startsWith("ERROR: duplicate key value "))
-            {
+            if (e.getMessage().startsWith("ERROR: duplicate key value ")) {
                 msg = "Brugernavnet findes allerede. Vælg et andet";
             }
             throw new DatabaseException(msg, e.getMessage());
         }
+
+
+    }
+
+    public static void createOrderLine(int bottomId, int toppingId, int quantity, int orderId) throws DatabaseException {
+
+        //OrderLines in DB is created by this method, which gets called in createOrder
+        String sql = "insert into orderline (order_id, bottom_id, topping_id, quantity) values (?,?,?,?)";
+
+
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+
+
+        ) {
+
+            ps.setInt(1, orderId);
+            ps.setInt(2, bottomId);
+            ps.setInt(3, toppingId);
+            ps.setInt(4, quantity);
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected != 1)
+            {
+                throw new DatabaseException("Fejl ved oprettelse af orderlinje");
+            }
+
+        } catch (SQLException e) {
+            String msg = "Der er sket en fejl ved bestilling. Prøv igen";
+
+            throw new DatabaseException(msg , e.getMessage());
+        }
+
     }
 }

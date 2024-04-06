@@ -3,6 +3,7 @@ package app.controllers;
 import app.entities.Cupcake;
 import app.entities.User;
 import app.persistence.ConnectionPool;
+import app.persistence.OrderMapper;
 import io.javalin.Javalin;
 
 import java.util.List;
@@ -25,14 +26,21 @@ public class PaymentController {
 
 
             User user = ctx.sessionAttribute("currentUser");
+
+
             System.out.println(user);
             //if the user is logged in, the order is succesfull, if the user is not logged in, the user is redirected to login.html
-            if(user != null){
-
-                ctx.render("order_processed.html");
+            if(user != null ){
+                if (user.getBalance() >= sum){
+                    //sending order to DB if user exists
+                    OrderMapper.createOrder(user, basketList, sum, connectionPool);
+                    ctx.render("order_processed.html");
+                }else {
+                    System.out.println("Du har ikke penge nok");
+                    //TODO: the user should be notified by the pay button of insufficient funds and not be directed to index page
+                    ctx.render("index.html");
+                }
             }else ctx.render("login.html");
-
-
         });
     }
 }

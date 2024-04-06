@@ -28,7 +28,13 @@ public class User {
         this.phonenumber = phonenumber;
         this.balance = 0;
     }
+
+
     public User(int id, String username, String password, int role, String email) {
+    }
+
+    public int getBalance() {
+        return balance;
     }
 
     public int getUserId() {
