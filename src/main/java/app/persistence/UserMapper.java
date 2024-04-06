@@ -105,22 +105,24 @@ public class UserMapper {
         }
     }
 
-    public static void addBalance (int userId, double balance, ConnectionPool connectionPool)
-    {
+    public static void addBalance(int userId, double balance, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "UPDATE users SET balance = balance + ? WHERE user_id = ?";
 
-        try (
-                Connection connection = connectionPool.getConnection();
-                PreparedStatement ps = connection.prepareStatement(sql)
-        )
-        {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
 
             ps.setDouble(1, balance);
             ps.setInt(2, userId);
-            int rowsAffected =  ps.executeUpdate();
+            int rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected == 0) {
+                throw new DatabaseException("Brugeren blev ikke fundet i databasen");
+            }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            String msg = "Der er sket en fejl ved overførsel af penge. Prøv igen.";
+            throw new DatabaseException(msg, e.getMessage());
         }
     }
+
 }

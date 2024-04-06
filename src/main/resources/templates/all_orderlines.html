@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<title>Cupcake</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+<body>
+<div id="page">
+
+    <header>
+        <a href="index.html" th:href="@{/}">
+            <img src="../public/images/cupcakelogo.png" th:src="@{/images/cupcakelogo.png}"width =80%/>
+        </a>
+    </header>
+
+    <nav>
+        <div id="left-nav">
+            <a href="https://dr.dk">Orders</a>
+            <a href="https://eb.dk">Kunder</a>
+        </div>
+        <div id="right-nav"> <span th:text="${session.currentUser.email}"></span>  </div>
+    </nav>
+
+    <h1>Du er nu logget ind som Admin</h1>
+    <h1>Alle bestilte cupcakes</h1>
+
+    <table>
+        <thead>
+        <tr>
+
+            <th>styk</th>
+            <th>Topping</th>
+            <th>Bund</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="orderline : ${allOrderlines}">
+            <td th:text="${orderline.quantity}"></td>
+            <td th:text="${orderline.top.flavour}"></td>
+            <td th:text="${orderline.bottom.flavour}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+
+    <p th:if="${session.currentUser != null}">
+        <a href="admin_page.html" th:href="@{/admin}">Tilbage</a>
+    </p>

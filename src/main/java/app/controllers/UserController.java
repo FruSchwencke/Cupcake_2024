@@ -20,8 +20,8 @@ public class UserController {
         app.get("logout", ctx -> logout(ctx));
         app.get("createuser", ctx ->ctx.render("createuser"));
         app.post("createuser", ctx -> createUser(ctx, connectionPool));
-        app.post("addBalance", ctx -> addBalance(ctx, connectionPool));
-        app.get("order_details.html", ctx -> showOrderLines(ctx, connectionPool));
+        app.post("/addBalance", ctx -> addBalance(ctx, connectionPool));
+
         
     }
 
@@ -98,45 +98,21 @@ public class UserController {
 
     }
 
-
-    public static void showOrderLines(Context ctx, ConnectionPool connectionPool) {
-
-        int orderId = Integer.parseInt(ctx.queryParam("orderId"));
-
-        List<Cupcake> orderLines = OrderMapper.getOrderlinePerOrder(orderId, connectionPool);
-
-        ctx.attribute("orderLines", orderLines);
-
-        ctx.render("order_details.html");
-    }
-
-    public static void showAllOrderlines(Context ctx, ConnectionPool connectionPool) {
-
-        List<Cupcake> allOrderlines = OrderMapper.getAllOrderlines(connectionPool);
-
-        ctx.attribute("allOrderlines", allOrderlines);
-
-        ctx.render("all_orderlines.html");
-    }
-
-    public static void addBalance (Context ctx, ConnectionPool connectionPool) //mangler ifstatement
-    {
+    public static void addBalance(Context ctx, ConnectionPool connectionPool) {
         double balance = Double.parseDouble(ctx.formParam("balance"));
-
         int userId = Integer.parseInt(ctx.formParam("userId"));
+
         try {
             UserMapper.addBalance(userId, balance, connectionPool);
-
-            ctx.attribute("message", "Penge overført");
+            ctx.attribute("message", balance + " kr overført til bruger ID: " + userId + ".");
             ctx.render("admin_page.html");
 
-
-        }catch (RuntimeException e) {
-            ctx.attribute("message", "Bruger findes ikke");
+        } catch (DatabaseException e) {
+            ctx.attribute("message", e.getMessage());
             ctx.render("admin_page.html");
         }
-
     }
+
 
 
     private static void logout(Context ctx)
@@ -144,6 +120,5 @@ public class UserController {
         ctx.req().getSession().invalidate();
         ctx.redirect("/");
     }
-
 
 }
