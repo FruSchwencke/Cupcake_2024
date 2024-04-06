@@ -136,8 +136,8 @@ public class OrderMapper {
 
 
     public static void createOrder(User user, List<Cupcake> cupcakes, double totalPrice, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "insert into orders (user_id, price_total, pickup_time) values (?,?,?)";
 
+        String sql = "insert into orders (user_id, price_total, pickup_time) values (?,?,?)";
 
         try (
                 Connection connection = connectionPool.getConnection();
@@ -156,7 +156,7 @@ public class OrderMapper {
                 rs.next();
                 int orderId = rs.getInt("order_id");
 
-                //For each customized cupcake and wanted quantity, the orderLine is created in DB
+                //For each customized cupcake and wanted quantity, the orderLines are created and connected to an order on a user_id in DB
                 cupcakes.forEach(cupcake -> {
                     try {
                         createOrderLine(cupcake.getBottom().getBottomId(), cupcake.getTop().getTopId(), cupcake.getQuantity(), orderId);
@@ -183,7 +183,7 @@ public class OrderMapper {
 
     public static void createOrderLine(int bottomId, int toppingId, int quantity, int orderId) throws DatabaseException {
 
-        //OrderLines in DB is created by this method, which gets called in createOrder
+        //OrderLines are created in DB by this method, which gets called in createOrder
         String sql = "insert into orderline (order_id, bottom_id, topping_id, quantity) values (?,?,?,?)";
 
 
