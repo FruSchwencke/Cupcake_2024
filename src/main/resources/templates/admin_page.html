@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Cupcake</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <title>Cupcake</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
 </head>
 <body>
 <div id="page">
@@ -25,24 +25,6 @@
 
     <h1>Du er nu logget ind som Admin</h1>
 
-    <h1>Alle ordrer</h1>
-    <table class="All-orders-tabel">
-        <thead>
-        <tr>
-            <th>Ordre ID</th>
-            <th>Total pris</th>
-
-        </tr>
-        </thead>
-        <tbody>
-
-        <tr th:each="order : ${allOrdersList}">
-            <td th:text="${order.orderId}"></td>
-            <td th:text="${order.totalPrice}"></td>
-
-        </tr>
-        </tbody>
-    </table>
 
     <form th:action="@{/allOrderlines}" method="get">
         <button type="submit">Vis alle bestilte cupcakes</button>
@@ -72,6 +54,25 @@
     <p th:if="${session.currentUser != null}">
         <a href="index.html" th:href="@{/logout}">Log ud</a>
     </p>
+
+    <h1>Alle ordrer</h1>
+    <table class="All-orders-tabel">
+        <thead>
+        <tr>
+            <th>Ordre ID</th>
+            <th>Total pris</th>
+
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="order : ${allOrdersList}">
+            <td th:text="${order.orderId}"></td>
+            <td th:text="${order.totalPrice}"></td>
+
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 </body>

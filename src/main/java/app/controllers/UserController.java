@@ -72,6 +72,7 @@ public class UserController {
                 ctx.sessionAttribute("currentUser", user);
                 List<Order> allOrdersList = getAllOrders(connectionPool);
                 ctx.attribute("allOrdersList",allOrdersList);
+
                 ctx.render("admin_page.html");
             }else {
                 ctx.sessionAttribute("currentUser", user);
