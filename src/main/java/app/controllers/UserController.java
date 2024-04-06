@@ -22,8 +22,7 @@ public class UserController {
         app.post("createuser", ctx -> createUser(ctx, connectionPool));
         app.post("addBalance", ctx -> addBalance(ctx, connectionPool));
         app.get("order_details.html", ctx -> showOrderLines(ctx, connectionPool));
-        app.get("admin", ctx -> ctx.render("admin"));
-
+        
     }
 
     private static void createUser(Context ctx, ConnectionPool connectionPool) {
@@ -111,7 +110,14 @@ public class UserController {
         ctx.render("order_details.html");
     }
 
+    public static void showAllOrderlines(Context ctx, ConnectionPool connectionPool) {
 
+        List<Cupcake> allOrderlines = OrderMapper.getAllOrderlines(connectionPool);
+
+        ctx.attribute("allOrderlines", allOrderlines);
+
+        ctx.render("all_orderlines.html");
+    }
 
     public static void addBalance (Context ctx, ConnectionPool connectionPool) //mangler ifstatement
     {

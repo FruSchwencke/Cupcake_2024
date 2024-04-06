@@ -72,6 +72,37 @@ public class OrderMapper {
 
 
     }
+
+    public static List<Cupcake> getAllOrderlines(ConnectionPool connectionPool) {
+
+        List<Cupcake> orderlineListAll = new ArrayList<>();
+        String sql = "SELECT ol.topping_id, ol.bottom_id, ol.quantity, t.flavour AS top_flavour, b.flavour AS bottom_flavour " +
+                "FROM orderline AS ol " +
+                "JOIN topping AS t ON ol.topping_id = t.topping_id " +
+                "JOIN bottom AS b ON ol.bottom_id = b.bottom_id";
+
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Top top = new Top(rs.getInt("topping_id"), rs.getString("top_flavour"));
+                Bottom bottom = new Bottom(rs.getInt("bottom_id"), rs.getString("bottom_flavour"));
+                int quantity = rs.getInt("quantity");
+
+                Cupcake cupcake = new Cupcake(bottom, top, quantity);
+                orderlineListAll.add(cupcake);
+            }
+
+            return orderlineListAll;
+
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
 }
 
 
