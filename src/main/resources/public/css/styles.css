@@ -31,7 +31,9 @@ nav {
     margin-top: 10px;
     font-size: 1.5rem;
 }
-
+#center-nav {
+  padding: 0;
+}
 #content {
     /* background-color: lightgray;*/
     padding:20px;
@@ -124,6 +126,25 @@ nav {
         border: 1px solid #ddd;
         padding: 10px;
     }
+
+
+ table {
+     font-family: arial, sans-serif;
+     border-collapse: collapse;
+     width: 100%;
+     background-color: #c3efd5;
+ }
+
+td, th {
+    border: 1px solid #000000;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: white;
+}
+
 
 
 
