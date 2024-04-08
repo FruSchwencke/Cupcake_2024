@@ -225,10 +225,11 @@ public class OrderMapper {
             ps.setInt(1, orderId);
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected != 1) {
-                throw new DatabaseException("Fejl ved sletning af ordre");
+                throw new DatabaseException("Brugeren findes ikke");
             }
         } catch (SQLException e) {
-            throw new DatabaseException("Fejl ved sletning af en ordre", e.getMessage());
+            String msg= "Der er sket en fejl ved sletning af ordre, prøv igen";
+            throw new DatabaseException(msg, e.getMessage());
         }
     }
 

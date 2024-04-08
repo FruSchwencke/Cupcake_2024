@@ -74,19 +74,19 @@ public class OrderController {
         ctx.render("all_orderlines.html");
     }
 
-        public static void deleteOrder(Context ctx, ConnectionPool connectionPool) {
-            int orderId = Integer.parseInt(ctx.formParam("orderId"));
 
-            try {
-                OrderMapper.deleteOrder(orderId, connectionPool);
-                ctx.attribute("message", "Ordren blev slettet succesfuldt");
-            } catch (DatabaseException e) {
 
-                ctx.attribute("errorMessage", e.getMessage());
-            }
-
-            ctx.redirect("/admin");
+    public static void deleteOrder(Context ctx, ConnectionPool connectionPool) {
+        int orderId = Integer.parseInt(ctx.formParam("orderId"));
+        try {
+            OrderMapper.deleteOrder(orderId, connectionPool);
+            ctx.attribute("message", "Ordre med ID " + orderId + " er slettet.");
+            ctx.render("admin_page.html");
+        } catch (DatabaseException e) {
+            ctx.attribute("message", e.getMessage());
+            ctx.render("admin_page.html");
         }
+    }
 
 
 

@@ -83,19 +83,6 @@ public class UserController {
 
     }
 
-    private static List<Order> getAllOrders(ConnectionPool connectionPool)
-    {
-
-        try {
-            List<Order> allOrdersList = OrderMapper.getAllOrders(connectionPool);
-            return allOrdersList;
-
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e); //HUSK!
-        }
-
-    }
 
     public static void addBalance(Context ctx, ConnectionPool connectionPool) {
         double balance = Double.parseDouble(ctx.formParam("balance"));
@@ -111,7 +98,6 @@ public class UserController {
             ctx.render("admin_page.html");
         }
     }
-
 
 
     private static void logout(Context ctx)
