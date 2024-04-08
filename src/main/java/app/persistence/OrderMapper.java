@@ -215,20 +215,31 @@ public class OrderMapper {
 
     }
 
-    public static void deleteOrder(int orderId, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "DELETE FROM orders WHERE order_id = ?";
+    public static void deleteOrder(int orderId, ConnectionPool connectionPool) throws DatabaseException, SQLException {
+        String orderlineSql = "DELETE FROM orderline WHERE order_id = ?";
+        String orderSql = "DELETE FROM orders WHERE order_id = ?";
 
         try (
                 Connection connection = connectionPool.getConnection();
-                PreparedStatement ps = connection.prepareStatement(sql)
+                PreparedStatement psOrderline = connection.prepareStatement(orderlineSql);
         ) {
-            ps.setInt(1, orderId);
-            int rowsAffected = ps.executeUpdate();
-            if (rowsAffected != 1) {
+            psOrderline.setInt(1, orderId);
+            int orderlineRowsAffected = psOrderline.executeUpdate();
+            if (orderlineRowsAffected == 0) {
                 throw new DatabaseException("Ordre ID findes ikke");
             }
+
+            try (
+                    PreparedStatement psOrder = connection.prepareStatement(orderSql);
+            ) {
+                psOrder.setInt(1, orderId);
+                int orderRowsAffected = psOrder.executeUpdate();
+                if (orderRowsAffected == 0) {
+                    throw new DatabaseException("Ordre ID findes ikke");
+                }
+            }
         } catch (SQLException e) {
-            String msg= "Der er sket en fejl ved sletning af ordre, prøv igen";
+            String msg = "Der er sket en fejl ved sletning af ordre, prøv igen";
             throw new DatabaseException(msg, e.getMessage());
         }
     }

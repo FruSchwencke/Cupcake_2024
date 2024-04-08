@@ -82,12 +82,12 @@ public class OrderController {
         try {
             OrderMapper.deleteOrder(orderId, connectionPool);
             ctx.attribute("messagedelete", "Ordre med ID " + orderId + " er slettet.");
-            ctx.render("admin_page.html");
-        } catch (DatabaseException e) {
+        } catch (DatabaseException | SQLException e) {
             ctx.attribute("messagedelete", e.getMessage());
-            ctx.render("admin_page.html");
         }
+        ctx.render("admin_page.html");
     }
+
 
 
 
