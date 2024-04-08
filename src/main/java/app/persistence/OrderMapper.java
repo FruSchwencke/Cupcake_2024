@@ -214,4 +214,22 @@ public class OrderMapper {
         }
 
     }
+
+    public static void deleteOrder(int orderId, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "DELETE FROM orders WHERE order_id = ?";
+
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+            ps.setInt(1, orderId);
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected != 1) {
+                throw new DatabaseException("Fejl ved sletning af ordre");
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Fejl ved sletning af en ordre", e.getMessage());
+        }
+    }
+
 }

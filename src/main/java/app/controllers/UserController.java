@@ -41,7 +41,7 @@ public class UserController {
         if(password1.equals(password2)){
             try {
                 UserMapper.createuser(email, password1, userName, phoneNumber, connectionPool);
-                ctx.attribute("message", "du er hermed oprettet med " + email + ". Nu skal du logge på.");
+                ctx.sessionAttribute("message", "du er hermed oprettet med " + email + ". Nu skal du logge på.");
                 ctx.render("login.html");
 
             } catch (DatabaseException e) {
@@ -70,8 +70,6 @@ public class UserController {
             User user = UserMapper.login(email, password, connectionPool );
             if (user.getRole() ==1){
                 ctx.sessionAttribute("currentUser", user);
-                List<Order> allOrdersList = getAllOrders(connectionPool);
-                ctx.attribute("allOrdersList",allOrdersList);
 
                 ctx.render("admin_page.html");
             }else {

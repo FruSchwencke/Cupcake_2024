@@ -72,8 +72,8 @@ public class UserMapper {
             throw new DatabaseException("DB fejl", e.getMessage());
         }
 
-
     }
+
     public static void createuser(String email, String password, String userName, String phonenumber, ConnectionPool connectionPool) throws DatabaseException
     {
         String sql = "insert into users (email, user_password, user_name, phonenumber) values (?,?,?,?)";

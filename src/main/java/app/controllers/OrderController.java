@@ -1,6 +1,7 @@
 package app.controllers;
 
 import app.entities.*;
+import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
 import app.persistence.OrderMapper;
 import io.javalin.Javalin;
@@ -8,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import io.javalin.http.Context;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -32,24 +34,23 @@ public class OrderController {
 
         app.get("order_details.html", ctx -> showOrderLines(ctx, connectionPool));
         app.get("/allOrderlines", ctx -> showAllOrderlines(ctx, connectionPool));
-        app.get("/admin", ctx -> ctx.render("/admin_page.html"));
-
-
+        app.get("allOrders", ctx -> getAllOrders(ctx, connectionPool));
+        app.get("/adminback", ctx -> ctx.render("admin_page.html"));
 
 
     }
-    private static List<Order> getAllOrders(ConnectionPool connectionPool)
-    {
 
+
+
+    private static void getAllOrders(Context ctx, ConnectionPool connectionPool) {
         try {
             List<Order> allOrdersList = OrderMapper.getAllOrders(connectionPool);
-            return allOrdersList;
+            ctx.attribute("allOrdersList", allOrdersList);
 
-
+            ctx.render("all_orders.html");
         } catch (SQLException e) {
-            throw new RuntimeException(e); //HUSK!
+            throw new RuntimeException(e);
         }
-
     }
 
 
@@ -72,5 +73,22 @@ public class OrderController {
 
         ctx.render("all_orderlines.html");
     }
+
+        public static void deleteOrder(Context ctx, ConnectionPool connectionPool) {
+            int orderId = Integer.parseInt(ctx.formParam("orderId"));
+
+            try {
+                OrderMapper.deleteOrder(orderId, connectionPool);
+                ctx.attribute("message", "Ordren blev slettet succesfuldt");
+            } catch (DatabaseException e) {
+
+                ctx.attribute("errorMessage", e.getMessage());
+            }
+
+            ctx.redirect("/admin");
+        }
+
+
+
 }
 

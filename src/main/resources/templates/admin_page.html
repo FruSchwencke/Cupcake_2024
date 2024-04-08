@@ -30,6 +30,12 @@
         <button type="submit">Vis alle bestilte cupcakes</button>
     </form>
 
+    <form th:action="@{/allOrders}" method="get">
+        <button type="submit">Vis alle ordre</button>
+    </form>
+
+    </form>
+
     <h1>Indtast Order ID</h1>
     <form id="order-form" method="get" action="/order_details.html">
         <input type="text" name="orderId" placeholder="Indtast Order ID" required/>
@@ -55,25 +61,7 @@
         <a href="index.html" th:href="@{/logout}">Log ud</a>
     </p>
 
-    <h1>Alle ordrer</h1>
-    <table class="All-orders-tabel">
-        <thead>
-        <tr>
-            <th>Ordre ID</th>
-            <th>Total pris</th>
 
-        </tr>
-        </thead>
-        <tbody>
-
-        <tr th:each="order : ${allOrdersList}">
-            <td th:text="${order.orderId}"></td>
-            <td th:text="${order.totalPrice}"></td>
-
-        </tr>
-        </tbody>
-    </table>
-</div>
 
 </body>
 </html>

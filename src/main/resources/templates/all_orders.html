@@ -24,32 +24,38 @@
     </nav>
 
     <h1>Du er nu logget ind som Admin</h1>
-    <h1>Alle bestilte cupcakes</h1>
 
-    <table>
+
+    <h1>Alle ordrer</h1>
+    <table class="All-orders-tabel">
         <thead>
         <tr>
+            <th>Ordre ID</th>
+            <th>Total pris</th>
 
-            <th>styk</th>
-            <th>Topping</th>
-            <th>Bund</th>
         </tr>
         </thead>
         <tbody>
 
-        <tr th:each="orderline : ${allOrderlines}">
-            <td th:text="${orderline.quantity}"></td>
-            <td th:text="${orderline.top.flavour}"></td>
-            <td th:text="${orderline.bottom.flavour}"></td>
+        <tr th:each="order : ${allOrdersList}">
+            <td th:text="${order.orderId}"></td>
+            <td th:text="${order.totalPrice}"></td>
+
         </tr>
         </tbody>
     </table>
 
 
-
-
     <p th:if="${session.currentUser != null}">
         <a href="admin_page.html" th:href="@{/adminback}">Tilbage</a>
     </p>
+
+
+
+    <p th:if="${session.currentUser != null}">
+        <a href="index.html" th:href="@{/logout}">Log ud</a>
+    </p>
+</div>
+
 </body>
 </html>
