@@ -36,6 +36,7 @@ public class OrderController {
         app.get("/allOrderlines", ctx -> showAllOrderlines(ctx, connectionPool));
         app.get("allOrders", ctx -> getAllOrders(ctx, connectionPool));
         app.get("/adminback", ctx -> ctx.render("admin_page.html"));
+        app.post("/deleteOrder", ctx -> deleteOrder(ctx, connectionPool));
 
 
     }
@@ -80,10 +81,10 @@ public class OrderController {
         int orderId = Integer.parseInt(ctx.formParam("orderId"));
         try {
             OrderMapper.deleteOrder(orderId, connectionPool);
-            ctx.attribute("message", "Ordre med ID " + orderId + " er slettet.");
+            ctx.attribute("messagedelete", "Ordre med ID " + orderId + " er slettet.");
             ctx.render("admin_page.html");
         } catch (DatabaseException e) {
-            ctx.attribute("message", e.getMessage());
+            ctx.attribute("messagedelete", e.getMessage());
             ctx.render("admin_page.html");
         }
     }

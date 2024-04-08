@@ -90,11 +90,11 @@ public class UserController {
 
         try {
             UserMapper.addBalance(userId, balance, connectionPool);
-            ctx.attribute("message", balance + " kr overført til bruger ID: " + userId + ".");
+            ctx.attribute("messagebalance", balance + " kr overført til bruger ID: " + userId + ".");
             ctx.render("admin_page.html");
 
         } catch (DatabaseException e) {
-            ctx.attribute("message", e.getMessage());
+            ctx.attribute("messagebalance", e.getMessage());
             ctx.render("admin_page.html");
         }
     }

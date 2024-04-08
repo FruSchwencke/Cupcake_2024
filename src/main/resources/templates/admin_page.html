@@ -53,7 +53,16 @@
         <button type="submit">Tilføj Balance</button>
     </form>
 
-    <p th:if="${message != null}" th:text="${message}"></p>
+    <p th:if="${messagebalance != null}" th:text="${messagebalance}"></p>
+
+    <h1>Slet ordre</h1>
+    <form action="/deleteOrder" method="post">
+        <label for="orderId">Order ID:</label><br>
+        <input type="text" id="orderId" name="orderId" required><br><br>
+        <button type="submit">Delete</button>
+    </form>
+
+    <p th:if="${messagedelete != null}" th:text="${messagedelete}"></p>
 
 
     <p th:if="${session.currentUser != null}">
