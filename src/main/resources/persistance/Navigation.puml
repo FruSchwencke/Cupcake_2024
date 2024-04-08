@@ -2,9 +2,19 @@
 'https://plantuml.com/state-diagram
 
 scale 400 width
+scale 400 height
+
+state Note  #aliceblue;line:blue;line.dotted;text:blue   : Blå stiplet streger indikere at man kan klikke tilbage til forsiden.
+
+
 [*] --> Forside
 Forside --> Kurv
+Forside --> login
+Forside -->OpretKonto
 Kurv --> login
+Kurv -[dotted,#blue]-> Forside
+login -[dotted,#blue]->Forside
+OpretKonto -[dotted,#blue]->Forside
 
 Kurv: basket.html
 Forside: index.html
@@ -14,6 +24,7 @@ login: login.html
 
 
 login --> OpretKonto
+
 state LoggedIn{
 login --> AdminPage
 login --> Customerpage
@@ -22,12 +33,13 @@ OpretKonto --> Customerpage
 AdminPage : admin_page.html
 Customerpage: customer_page.html
 
-}
+
 
 state AdminOnly{
 AdminPage --> AllOrders
 AdminPage --> AllOrderlines
 AdminPage --> OrderDetails
+AdminPage -[dotted,#blue]-> Forside
 
 AllOrders: all_order.html
 AllOrderlines: all_orderlines.html
@@ -35,8 +47,10 @@ OrderDetails: order_details.html
 }
 state CustomerOnly{
 Customerpage --> checkout
-
+Customerpage -[dotted,#blue]-> Forside
 checkout:order_processed.html
+}
+
 }
 checkout -->[*]
 
