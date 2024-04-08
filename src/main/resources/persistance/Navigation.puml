@@ -1,0 +1,46 @@
+@startuml
+'https://plantuml.com/state-diagram
+
+scale 400 width
+[*] --> Forside
+Forside --> Kurv
+Kurv --> login
+
+Kurv: basket.html
+Forside: index.html
+OpretKonto : createuser.html
+login: login.html
+
+
+
+login --> OpretKonto
+state LoggedIn{
+login --> AdminPage
+login --> Customerpage
+OpretKonto --> Customerpage
+
+AdminPage : admin_page.html
+Customerpage: customer_page.html
+
+}
+
+state AdminOnly{
+AdminPage --> AllOrders
+AdminPage --> AllOrderlines
+AdminPage --> OrderDetails
+
+AllOrders: all_order.html
+AllOrderlines: all_orderlines.html
+OrderDetails: order_details.html
+}
+state CustomerOnly{
+Customerpage --> checkout
+
+checkout:order_processed.html
+}
+checkout -->[*]
+
+
+
+
+@enduml
