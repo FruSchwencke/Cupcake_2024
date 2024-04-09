@@ -35,6 +35,7 @@
         <div id="intro-text">
             <h1>Velkommen ombord</h1>
             <h2>Øens bedste cupcakes</h2>
+
         </div>
 
         <form action="#" th:action="@{/addToBasket}">
@@ -63,12 +64,16 @@
             </select>
         </div>
 
-
-
         <div id="order-button">
                 <button type="submit">Tilføj</button>
         </div>
         </form>
+    </div>
+
+    <div id="oplysning">
+        <p>Alle ordrer bestilt inden kl 22 er klar til afhentningen efterfølgende dag i tidsrummet 12-15.
+
+            OBS: Ordrer bestilt efter 22, kan hentes om 2 dage </p>
     </div>
 
     <p><a href="createuser.html" th:href="@{/createuser}">Opret konto</a> </p>

@@ -24,7 +24,7 @@
 
     <h1>Du er nu logget ind som Admin</h1>
 
-
+<form id="orderknap">
     <form th:action="@{/allOrderlines}" method="get">
         <button type="submit">Vis alle bestilte cupcakes</button>
     </form>
@@ -35,14 +35,14 @@
 
     </form>
 
-    <h1>Indtast Order ID</h1>
+    <h2>Indtast Order ID</h2>
     <form id="order-form" method="get" action="/order_details.html">
         <input type="text" name="orderId" placeholder="Indtast Order ID" required/>
         <button type="submit">Vis ordre</button>
     </form>
 
 
-    <h1>Tilføj penge til konto</h1>
+    <h2>Tilføj penge til konto</h2>
     <form action="/addBalance" method="post">
         <label for="userId">Brugerens ID:</label><br>
         <input type="number" id="userId" name="userId" required><br>
@@ -55,7 +55,7 @@
 
     <p th:if="${messagebalance != null}" th:text="${messagebalance}"></p>
 
-    <h1>Slet ordre</h1>
+    <h2>Slet ordre</h2>
     <form action="/deleteOrder" method="post">
         <label for="orderId">Order ID:</label><br>
         <input type="text" id="orderId" name="orderId" required><br><br>
