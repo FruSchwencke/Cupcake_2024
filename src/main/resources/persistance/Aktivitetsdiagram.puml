@@ -1,0 +1,46 @@
+@startuml
+
+|kunden|
+start
+:opret ordre;
+
+|system|
+:cupcake;
+
+
+|shop|
+ if (kurv) then (tilføj)
+ |system|
+  :orderlines;
+    |kunden|
+   :tilføj mere til ordre;
+
+ |kunden|
+ :viskurv;
+ |system|
+
+ |shop|
+ :kurv opdateret;
+ endif
+
+|kunden|
+ :betal;
+|system|
+ if (check balance) then (no)
+ |kunden|
+ :Ingen penge;
+ end
+
+
+
+ endif
+
+
+
+|betaling|
+:betaling gennemført;
+
+stop
+
+
+@enduml
