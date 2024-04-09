@@ -125,4 +125,30 @@ public class UserMapper {
         }
     }
 
+
+    public static double checkBalance(int userId, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "SELECT balance from users WHERE user_id = ?";
+
+        try (Connection connection = connectionPool.getConnection();
+
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next())
+            {
+                double balance = rs.getInt("balance");
+
+                return balance;
+            } else
+            {
+                throw new DatabaseException("fejl");
+            }
+
+        } catch (SQLException e) {
+            String msg = "Der er sket en fejl.";
+            throw new DatabaseException(msg, e.getMessage());
+        }
+    }
+
 }

@@ -4,6 +4,7 @@ import app.entities.Cupcake;
 import app.entities.User;
 import app.persistence.ConnectionPool;
 import app.persistence.OrderMapper;
+import app.persistence.UserMapper;
 import io.javalin.Javalin;
 
 import java.util.List;
@@ -27,11 +28,12 @@ public class PaymentController {
 
             User user = ctx.sessionAttribute("currentUser");
 
-
             System.out.println(user);
+
             //if the user is logged in, the order is succesfull, if the user is not logged in, the user is redirected to login.html
             if(user != null ){
-                if (user.getBalance() >= sum){
+               // user.getBalance()
+                if (UserMapper.checkBalance(user.getUserId(), connectionPool) >= sum){
                     //sending order to DB if user exists
                     OrderMapper.createOrder(user, basketList, sum, connectionPool);
                     ctx.render("order_processed.html");

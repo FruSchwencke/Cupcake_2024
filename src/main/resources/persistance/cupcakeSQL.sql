@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS public.users
     phonenumber VARCHAR(8),
     user_password VARCHAR(255),
     role_id INT,
+	balance NUMERIC(10,2),
     FOREIGN KEY (role_id) REFERENCES public.role (role_id)
     );
 
