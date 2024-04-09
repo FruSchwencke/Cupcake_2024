@@ -81,7 +81,8 @@ public class OrderMapper {
         String sql = "SELECT ol.topping_id, ol.bottom_id, ol.quantity, t.flavour AS top_flavour, b.flavour AS bottom_flavour " +
                 "FROM orderline AS ol " +
                 "JOIN topping AS t ON ol.topping_id = t.topping_id " +
-                "JOIN bottom AS b ON ol.bottom_id = b.bottom_id";
+                "JOIN bottom AS b ON ol.bottom_id = b.bottom_id" +
+                "ORDER BY ol.bottom_id";
 
         try (
                 Connection connection = connectionPool.getConnection();

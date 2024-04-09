@@ -32,18 +32,22 @@
         <tr>
             <th>Ordre ID</th>
             <th>Total pris</th>
-
         </tr>
         </thead>
         <tbody>
-
         <tr th:each="order : ${allOrdersList}">
             <td th:text="${order.orderId}"></td>
             <td th:text="${order.totalPrice}"></td>
-
         </tr>
         </tbody>
+        <tfoot>
+        <tr>
+            <td><strong>Samlet omsætning:</strong></td>
+            <td><strong th:text="${totalSum}"></strong></td>
+        </tr>
+        </tfoot>
     </table>
+
 
 
     <p th:if="${session.currentUser != null}">
