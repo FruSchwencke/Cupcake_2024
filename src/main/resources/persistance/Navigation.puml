@@ -4,7 +4,7 @@
 scale 400 width
 scale 400 height
 
-state Note  #aliceblue;line:blue;line.dotted;text:blue   : Blå stiplet streger indikere at man kan klikke tilbage til forsiden.
+state Note #aliceblue;line:blue;line.dotted;text:blue   : Blå stiplet streger indikere at man kan returnere til forsiden, via headeren på samtlige html sider.
 
 
 [*] --> Forside
@@ -25,7 +25,9 @@ login: login.html
 
 login --> OpretKonto
 
+
 state LoggedIn{
+LoggedIn -[dotted,#blue]-> Forside
 login --> AdminPage
 login --> Customerpage
 OpretKonto --> Customerpage
@@ -39,15 +41,19 @@ state AdminOnly{
 AdminPage --> AllOrders
 AdminPage --> AllOrderlines
 AdminPage --> OrderDetails
-AdminPage -[dotted,#blue]-> Forside
+AllOrders --> AdminPage
+AllOrderlines-->AdminPage
+OrderDetails -->AdminPage
+
 
 AllOrders: all_order.html
 AllOrderlines: all_orderlines.html
 OrderDetails: order_details.html
+
+
 }
 state CustomerOnly{
 Customerpage --> checkout
-Customerpage -[dotted,#blue]-> Forside
 checkout:order_processed.html
 }
 
