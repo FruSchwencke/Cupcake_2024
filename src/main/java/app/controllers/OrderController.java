@@ -46,7 +46,10 @@ public class OrderController {
     private static void getAllOrders(Context ctx, ConnectionPool connectionPool) {
         try {
             List<Order> allOrdersList = OrderMapper.getAllOrders(connectionPool);
+            double totalSum = allOrdersList.stream().mapToDouble(Order::getTotalPrice).sum();
+
             ctx.attribute("allOrdersList", allOrdersList);
+            ctx.attribute("totalSum", totalSum);
 
             ctx.render("all_orders.html");
         } catch (SQLException e) {
