@@ -181,7 +181,6 @@ public class OrderMapper {
             throw new DatabaseException(msg, e.getMessage());
         }
 
-
     }
 
     public static void createOrderLine(int bottomId, int toppingId, int quantity, int orderId) throws DatabaseException {
