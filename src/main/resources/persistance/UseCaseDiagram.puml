@@ -1,0 +1,41 @@
+@startuml
+
+
+
+left to right direction
+actor Kunde as g
+
+package OlskerCupcake {
+  usecase "Bestil og betal" as UC1
+  usecase "Opret konto" as UC2
+  usecase "Indsæt Beløb til Kunde" as UC3
+  usecase "Kurv" as UC4
+  usecase "Login" as UC5
+  usecase "Alle Ordre" as UC6
+  usecase "Se Kunder & Ordre" as UC7 #red
+  usecase "Fjern ordrelinier" as UC8 #red
+  usecase "Fjern ordre" as UC9
+
+}
+
+g --> UC1
+g --> UC2
+Admin --> UC3
+g --> UC4
+g --> UC5
+Admin --> UC5
+Admin --> UC6
+Admin --> UC7
+g --> UC8
+Admin --> UC9
+
+ note right of UC7
+     ikke løst
+ end note
+
+ note right of UC8
+      ikke løst
+  end note
+@enduml
+
+
