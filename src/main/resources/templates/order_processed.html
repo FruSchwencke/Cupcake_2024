@@ -15,6 +15,11 @@
         </a>
     </header>
 
+    <p th:if="${session.currentUser != null}">
+        <a href="index.html" th:href="@{/logout}">Log ud</a>
+    </p>
+
+
     <nav>
         <div id="left-nav">
             <a href="index.html">Tilbage</a>
