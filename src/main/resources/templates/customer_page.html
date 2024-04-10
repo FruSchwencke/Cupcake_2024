@@ -20,9 +20,16 @@
 
 
         </div>
-        <div id="right-nav"> <span th:text="${session.currentUser.email}"></span>  <a href ="basket.html" th:href="@{/basket}">
-            <img src="../public/images/basketlogo.png" th:src="@{/images/basketlogo.png}"/>
-        </a></div>
+        <div id="right-nav" class="basket-container">
+            <span th:if="${session.currentUser != null}" th:text="${session.currentUser.email}"></span>
+            <a href="basket.html" th:href="@{/basket}" class="basket-link">
+                <img src="../public/images/basketlogo.png" th:src="@{/images/basketlogo.png}" alt="Basket Logo" class="basket-image">
+                <p class="basket-count">
+                    <span th:text="${#lists.size(session.basketList)}"></span>
+                </p>
+            </a>
+        </div>
+
     </nav>
     <h1>du er nu logget ind som kunde </h1>
 
