@@ -32,8 +32,8 @@ public class OrderController {
 
         });
 
-        app.get("order_details.html", ctx -> showOrderLines(ctx, connectionPool));
-        app.get("/allOrderlines", ctx -> showAllOrderlines(ctx, connectionPool));
+        app.get("order_details.html", ctx -> getOrderlinesPerOrder(ctx, connectionPool));
+        app.get("/allOrderlines", ctx -> getAllOrderlines(ctx, connectionPool));
         app.get("allOrders", ctx -> getAllOrders(ctx, connectionPool));
         app.get("/adminback", ctx -> ctx.render("admin_page.html"));
         app.post("/deleteOrder", ctx -> deleteOrder(ctx, connectionPool));
@@ -58,7 +58,7 @@ public class OrderController {
     }
 
 
-    public static void showOrderLines(Context ctx, ConnectionPool connectionPool) {
+    public static void getOrderlinesPerOrder(Context ctx, ConnectionPool connectionPool) {
 
         int orderId = Integer.parseInt(ctx.queryParam("orderId"));
 
@@ -69,7 +69,7 @@ public class OrderController {
         ctx.render("order_details.html");
     }
 
-    public static void showAllOrderlines(Context ctx, ConnectionPool connectionPool) {
+    public static void getAllOrderlines(Context ctx, ConnectionPool connectionPool) {
 
         List<Cupcake> allOrderlines = OrderMapper.getAllOrderlines(connectionPool);
 
