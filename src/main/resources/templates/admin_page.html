@@ -24,7 +24,7 @@
 
     <h1>Du er nu logget ind som Admin</h1>
 
-<form id="orderknap">
+
     <form th:action="@{/allOrderlines}" method="get">
         <button type="submit">Vis alle bestilte cupcakes</button>
     </form>
@@ -33,7 +33,6 @@
         <button type="submit">Vis alle ordre</button>
     </form>
 
-    </form>
 
     <h2>Indtast Order ID</h2>
     <form id="order-form" method="get" action="/order_details.html">

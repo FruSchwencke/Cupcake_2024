@@ -33,15 +33,13 @@ public class OrderController {
         });
 
         app.get("order_details.html", ctx -> getOrderlinesPerOrder(ctx, connectionPool));
-        app.get("/allOrderlines", ctx -> getAllOrderlines(ctx, connectionPool));
+        app.get("allOrderlines", ctx -> getAllOrderlines(ctx, connectionPool));
         app.get("allOrders", ctx -> getAllOrders(ctx, connectionPool));
         app.get("/adminback", ctx -> ctx.render("admin_page.html"));
         app.post("/deleteOrder", ctx -> deleteOrder(ctx, connectionPool));
 
 
     }
-
-
 
     private static void getAllOrders(Context ctx, ConnectionPool connectionPool) {
         try {
