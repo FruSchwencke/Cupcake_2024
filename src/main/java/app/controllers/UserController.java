@@ -33,7 +33,7 @@ public class UserController {
         String phoneNumber = ctx.formParam("phonenumber");
 
         if (!EmailValidate(email)){
-            ctx.attribute("message", "Email address must contain '@' symbol");
+            ctx.attribute("message", "Email skal indholde '@' symbol");
             ctx.render("login.html");
             return;
         }
